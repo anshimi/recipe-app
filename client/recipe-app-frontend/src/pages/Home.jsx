@@ -7,17 +7,27 @@ function Home({ selectedCategory }) {
   const [loading, setLoading] = useState(false); // Keep track of loading internally
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Only allowed categories
 
+  const shuffleArray = (array) => {
+    // Function to shuffle an array
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   useEffect(() => {
     const fetchRecipes = async () => {
       setLoading(true); // Set loading to true only internally
-      
+
       try {
         if (selectedCategory && selectedCategory !== "") {
           // Fetch recipes for a specific category
           const response = await axios.get(
             `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`
           );
-          setRecipes(response.data.meals.slice(0, 6)); // Limit to 6 recipes
+          const shuffledRecipes = shuffleArray(response.data.meals); // Shuffle the recipes
+          setRecipes(shuffledRecipes.slice(0, 6)); // Limit to 6 random recipes
         } else {
           // Fetch random recipes only from the four allowed categories
           const randomRecipes = [];
