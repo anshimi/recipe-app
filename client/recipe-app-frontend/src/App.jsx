@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import RecipeDetails from "./pages/RecipeDetails";
 
 function App() {
-  useEffect(() => {
-    axios.get('http://localhost:5000')
-      .then(response => console.log(response.data))
-      .catch(error => console.error(error));
-  }, []);
-
-  return <h1>Recipe App Frontend</h1>;
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
+

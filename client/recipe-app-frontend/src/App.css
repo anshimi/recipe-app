@@ -1,42 +1,254 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
   text-align: center;
+  margin-top: 20px;
+  color: #333;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h2 {
+  margin: 20px;
+  color: #444;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  padding: 15px 20px;
+  background-color: #ffffff; /* Clean white background */
+  border-bottom: 2px solid #007bff; /* Blue border */
+  font-family: 'Arial', sans-serif; /* Consistent font */
+  gap: 10px;
+}
+
+.navbar-logo a {
+  font-size: 1.8rem; /* Slightly larger for prominence */
+  font-weight: bold;
+  text-decoration: none;
+  color: #007bff; /* Matches the border color */
+  transition: color 0.3s ease;
+}
+
+.navbar-logo a:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Categories - Inline with Search Bar */
+.navbar-categories {
+  display: flex; /* Align categories side by side */
+  gap: 15px; /* Space between each category */
+  margin-right: 10px; /* Add spacing between categories and search bar */
+}
+
+.category-link {
+  font-size: 1rem;
+  text-decoration: none; /* Removes underline */
+  color: #333; /* Default text color */
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.category-link:hover {
+  background-color: #f8f9fa; /* Light gray background on hover */
+}
+
+.selected-category {
+  background-color: #007bff; /* Highlighted background */
+  color: white; /* Text color for selected category */
+}
+
+/* Search Bar Styles */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-grow: 0; /* Prevents it from growing too wide */
+  width: 300px; /* Sets a specific width for the search bar */
+}
+
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-bar input::placeholder {
+  color: #aaa; /* Placeholder text color */
+}
+
+.search-bar button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Auth Links */
+.navbar-auth {
+  display: flex;
+  gap: 10px; /* Space between login and sign up links */
+}
+
+.navbar-auth a {
+  font-size: 1rem;
+  text-decoration: none; /* Removes underline */
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.navbar-auth a:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  to {
-    transform: rotate(360deg);
+
+  .navbar-logo {
+    margin-bottom: 10px;
+  }
+
+  .navbar-categories {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-right: 0;
+  }
+
+  .search-bar {
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .navbar-auth {
+    margin-top: 10px;
+    text-align: left;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Recipe Grid */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Recipe Card */
+.recipe-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  padding: 10px;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.recipe-card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.recipe-card button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.recipe-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  /* For tablets or smaller desktops */
+  .recipe-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
   }
 }
 
-.card {
-  padding: 2em;
+@media (max-width: 768px) {
+  /* For small tablets */
+  .recipe-grid {
+    grid-template-columns: repeat(2, 1fr); /* Still 2 cards per row */
+  }
+
+  .recipe-card h3 {
+    font-size: 1rem; /* Adjusted font size */
+  }
+
+  .recipe-card button {
+    font-size: 0.8rem; /* Smaller button text */
+  }
 }
 
-.read-the-docs {
-  color: #888;
+@media (max-width: 480px) {
+  /* For mobile devices */
+  .recipe-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
+  }
+
+  .recipe-card img {
+    height: 100px; /* Adjusted image height */
+  }
+
+  .recipe-card h3 {
+    font-size: 0.9rem; /* Smaller title text */
+  }
+
+  .recipe-card button {
+    font-size: 0.7rem; /* Smaller button text */
+    padding: 6px 10px; /* Smaller padding for buttons */
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
