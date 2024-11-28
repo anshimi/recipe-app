@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import "../App.css";
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
   const [query, setQuery] = useState("");
 
-  const handleSearch = () => {
-    console.log("Searching for:", query);
-    // Add your search logic here
+  const handleInputChange = (e) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    onSearch(newQuery); // Update the parent component with the query
   };
 
   return (
     <div className="search-bar">
       <input
         type="text"
-        placeholder="Search for yummy recipes!"
+        placeholder="Search for recipes..."
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleInputChange}
       />
-      <button onClick={handleSearch}>Search</button>
     </div>
   );
 }

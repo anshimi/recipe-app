@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom"; // Import BrowserRouter
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import "./App.css";
+import { AuthProvider } from "./components/AuthContext"; // Correct import for AuthContext
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter> {/* Wrap App in BrowserRouter */}
-      <App />
-    </BrowserRouter>
+    <AuthProvider> {/* Wrap App in AuthProvider */}
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
-
