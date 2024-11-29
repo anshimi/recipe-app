@@ -497,5 +497,24 @@ h2 {
   color: #cfc4c5;
   border: 1px solid #f5c6cb;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
 
+.page-button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  border-radius: 3px;
+}
+
+.page-button.active {
+  background: #007bff;
+  color: white;
+  border: none;
+}
 

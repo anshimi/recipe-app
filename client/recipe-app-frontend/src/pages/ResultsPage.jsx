@@ -6,6 +6,8 @@ function ResultsPage({ searchQuery }) {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const itemsPerPage = 10; // Number of items to show per page
 
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Expand as needed
 
@@ -21,7 +23,6 @@ function ResultsPage({ searchQuery }) {
             `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
           );
           if (categoryResponse.data.meals) {
-            console.log(`Fetched recipes for category: ${category}`, categoryResponse.data.meals); // Debugging
             allRecipes.push(...categoryResponse.data.meals);
           }
         }
@@ -44,7 +45,6 @@ function ResultsPage({ searchQuery }) {
         // Filter out any null responses
         const validRecipes = detailedRecipes.filter((recipe) => recipe !== null);
         setRecipes(validRecipes); // Save the complete recipe list
-        console.log("Fetched and detailed recipes:", validRecipes); // Debugging
       } catch (error) {
         console.error("Error fetching recipes:", error);
       } finally {
@@ -78,18 +78,45 @@ function ResultsPage({ searchQuery }) {
     });
 
     setFilteredRecipes(results);
-    console.log("Filtered recipes:", results); // Debugging
   }, [searchQuery, recipes]);
+
+  // Calculate paginated recipes
+  const paginatedRecipes = filteredRecipes.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(filteredRecipes.length / itemsPerPage);
 
   return (
     <div>
       {loading ? (
         <p>Loading results...</p>
       ) : filteredRecipes.length > 0 ? (
-        <div className="recipe-grid">
-          {filteredRecipes.map((recipe) => (
-            <RecipeCard key={recipe.idMeal} recipe={recipe} />
-          ))}
+        <div>
+          <div className="recipe-grid">
+            {paginatedRecipes.map((recipe) => (
+              <RecipeCard key={recipe.idMeal} recipe={recipe} />
+            ))}
+          </div>
+
+          {/* Pagination controls */}
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                className={`page-button ${currentPage === index + 1 ? "active" : ""}`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       ) : (
         <p>
