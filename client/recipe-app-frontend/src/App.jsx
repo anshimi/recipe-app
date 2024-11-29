@@ -7,7 +7,6 @@ import RecipeDetails from "./pages/RecipeDetails";
 import Registration from "./user/Register";
 import Login from "./user/Login";
 import Profile from "./pages/Profile";
-import SubmitRecipe from "./pages/SubmitRecipe";
 import axios from "axios";
 
 function App() {
