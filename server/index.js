@@ -13,9 +13,8 @@ const PORT = process.env.PORT || 4000;
 app.use(cors()); // Allow requests from other origins (React)
 app.use(express.json()); // Parse incoming JSON data
 
-// Database connection
 mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
