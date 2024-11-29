@@ -2,84 +2,102 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 
-function Home({ selectedCategory, searchQuery }) {
+function ResultsPage({ searchQuery }) {
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(false); // Track loading internally
-  const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Only allowed categories
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // Function to shuffle an array
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
+  const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Adjust categories as needed
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      setLoading(true); // Start loading
+    const fetchAllRecipes = async () => {
+      setLoading(true);
       try {
-        if (selectedCategory && selectedCategory !== "") {
-          // Fetch recipes for a specific category
-          const response = await axios.get(
-            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`
+        const allRecipes = [];
+
+        for (const category of categories) {
+          // Fetch recipes for each category
+          const categoryResponse = await axios.get(
+            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
           );
-          const shuffledRecipes = shuffleArray(response.data.meals); // Shuffle the recipes
-          setRecipes(shuffledRecipes.slice(0, 6)); // Limit to 6 random recipes
-        } else {
-          // Fetch random recipes from allowed categories
-          const randomRecipes = [];
-          for (let i = 0; i < 6; i++) {
-            const randomCategory =
-              categories[Math.floor(Math.random() * categories.length)];
-            const response = await axios.get(
-              `https://www.themealdb.com/api/json/v1/1/filter.php?c=${randomCategory}`
-            );
-            const recipesFromCategory = response.data.meals;
-            const randomRecipe =
-              recipesFromCategory[
-                Math.floor(Math.random() * recipesFromCategory.length)
-              ];
-            randomRecipes.push(randomRecipe); // Add random recipe to the list
+          if (categoryResponse.data.meals) {
+            allRecipes.push(...categoryResponse.data.meals);
           }
-          setRecipes(randomRecipes); // Update state with random recipes
         }
+
+        // Fetch details in batches of 10 to avoid overwhelming the API
+        const detailedRecipes = [];
+        for (let i = 0; i < allRecipes.length; i += 10) {
+          const batch = allRecipes.slice(i, i + 10);
+          const batchDetails = await Promise.all(
+            batch.map(async (meal) => {
+              try {
+                const detailsResponse = await axios.get(
+                  `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
+                );
+                return detailsResponse.data.meals[0];
+              } catch (error) {
+                console.error(`Error fetching details for meal ID: ${meal.idMeal}`, error);
+                return null;
+              }
+            })
+          );
+          detailedRecipes.push(...batchDetails.filter((recipe) => recipe !== null)); // Filter out null responses
+        }
+
+        setRecipes(detailedRecipes); // Update state with all detailed recipes
       } catch (error) {
         console.error("Error fetching recipes:", error);
       } finally {
-        setLoading(false); // Stop loading after fetching data
+        setLoading(false); // Stop loading
       }
     };
 
-    fetchRecipes();
-  }, [selectedCategory]);
+    fetchAllRecipes();
+  }, []);
 
-  // Filter recipes based on category and search query
-  const filteredRecipes = recipes.filter((recipe) => {
-    const matchesSearch = searchQuery
-      ? recipe.strMeal.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        recipe.strCategory.toLowerCase().includes(searchQuery.toLowerCase())
-      : true;
+  // Filter recipes locally based on searchQuery
+  useEffect(() => {
+    if (!searchQuery) {
+      setFilteredRecipes(recipes);
+      return;
+    }
 
-    return matchesSearch;
-  });
+    const query = searchQuery.toLowerCase();
+    const results = recipes.filter((recipe) => {
+      const meal = recipe.strMeal?.toLowerCase() || "";
+      const category = recipe.strCategory?.toLowerCase() || "";
+      const area = recipe.strArea?.toLowerCase() || "";
+      const instructions = recipe.strInstructions?.toLowerCase() || "";
+
+      return (
+        meal.includes(query) ||
+        category.includes(query) ||
+        area.includes(query) ||
+        instructions.includes(query)
+      );
+    });
+
+    setFilteredRecipes(results);
+  }, [searchQuery, recipes]);
 
   return (
-    <div className="container">
-      <h1>Welcome to Recipe Haven</h1>
-      <div className="recipe-grid">
-        {loading && <h2>Loading recipes...</h2>}
-        {filteredRecipes.length > 0 ? (
-          filteredRecipes.map((recipe) => (
+    <div>
+      {loading ? (
+        <p>Loading results...</p>
+      ) : filteredRecipes.length > 0 ? (
+        <div className="recipe-grid">
+          {filteredRecipes.map((recipe) => (
             <RecipeCard key={recipe.idMeal} recipe={recipe} />
-          ))
-        ) : (
-          !loading && <p>No recipes found. Try adjusting your filters.</p>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p>
+          No results found for <strong>"{searchQuery}"</strong>.
+        </p>
+      )}
     </div>
   );
 }
 
-export default Home;
+export default ResultsPage;

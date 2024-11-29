@@ -7,44 +7,57 @@ function ResultsPage({ searchQuery }) {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Expand as needed
+  const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Add more categories as needed
+
+  // Cache to store fetched recipes
+  const recipeCache = React.useRef({});
 
   useEffect(() => {
     const fetchAllRecipes = async () => {
       setLoading(true);
+
+      // Check if recipes are already cached
+      if (recipeCache.current.allRecipes) {
+        console.log("Loading recipes from cache...");
+        setRecipes(recipeCache.current.allRecipes);
+        setLoading(false);
+        return;
+      }
+
       try {
         const allRecipes = [];
 
-        // Fetch recipes for all allowed categories
         for (const category of categories) {
           const categoryResponse = await axios.get(
             `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
           );
           if (categoryResponse.data.meals) {
-            console.log(`Fetched recipes for category: ${category}`, categoryResponse.data.meals); // Debugging
             allRecipes.push(...categoryResponse.data.meals);
           }
         }
 
-        // Fetch full details for each recipe
-        const detailedRecipes = await Promise.all(
-          allRecipes.map(async (meal) => {
-            try {
-              const detailsResponse = await axios.get(
-                `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
-              );
-              return detailsResponse.data.meals[0]; // Return full recipe details
-            } catch (error) {
-              console.error(`Error fetching details for meal ID: ${meal.idMeal}`, error);
-              return null; // Skip recipes with issues
-            }
-          })
-        );
+        // Fetch details in batches
+        const detailedRecipes = [];
+        for (let i = 0; i < allRecipes.length; i += 10) {
+          const batch = allRecipes.slice(i, i + 10);
+          const batchDetails = await Promise.all(
+            batch.map(async (meal) => {
+              try {
+                const detailsResponse = await axios.get(
+                  `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`
+                );
+                return detailsResponse.data.meals[0];
+              } catch (error) {
+                console.error(`Error fetching details for meal ID: ${meal.idMeal}`, error);
+                return null;
+              }
+            })
+          );
+          detailedRecipes.push(...batchDetails.filter((recipe) => recipe !== null));
+        }
 
-        // Filter out any null responses
-        const validRecipes = detailedRecipes.filter((recipe) => recipe !== null);
-        setRecipes(validRecipes); // Save the complete recipe list
-        console.log("Fetched and detailed recipes:", validRecipes); // Debugging
+        recipeCache.current.allRecipes = detailedRecipes; // Cache the recipes
+        setRecipes(detailedRecipes); // Update state with recipes
       } catch (error) {
         console.error("Error fetching recipes:", error);
       } finally {
@@ -55,7 +68,6 @@ function ResultsPage({ searchQuery }) {
     fetchAllRecipes();
   }, []);
 
-  // Filter recipes locally based on searchQuery
   useEffect(() => {
     if (!searchQuery) {
       setFilteredRecipes(recipes);
@@ -78,7 +90,6 @@ function ResultsPage({ searchQuery }) {
     });
 
     setFilteredRecipes(results);
-    console.log("Filtered recipes:", results); // Debugging
   }, [searchQuery, recipes]);
 
   return (
