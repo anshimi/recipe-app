@@ -10,7 +10,7 @@ function Profile() {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/profile/${user.id}`);
+        const response = await axios.get(`${import.meta.env.VITE_BE_URL}/api/profile/${user.id}`);
         setFavorites(response.data.user.favorites || []); // Load favorites into state
       } catch (error) {
         console.error("Error fetching favorites:", error);

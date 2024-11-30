@@ -15,7 +15,7 @@ function RecipeCard({ recipe }) {
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/api/add-favorite", {
+      const response = await axios.post(`${import.meta.env.VITE_BE_URL}/api/add-favorite`, {
         userId: user.id,
         recipe: {
           id: recipe.idMeal,
