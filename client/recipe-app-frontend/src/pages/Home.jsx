@@ -10,7 +10,7 @@ function Home({ selectedCategory }) {
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Only allowed categories
   const cache = useRef({}); // Cache recipes to avoid unnecessary re-fetching
 
-  const shuffleAndLimit = (array, limit = 6) => {
+  const shuffleAndLimit = (array, limit = 12) => {
     // Shuffle and limit the array
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -59,7 +59,7 @@ function Home({ selectedCategory }) {
         }
 
         // Shuffle and pick 6 random recipes from all allowed categories
-        setRecipes(shuffleAndLimit(allRandomRecipes, 6));
+        setRecipes(shuffleAndLimit(allRandomRecipes, 12));
       }
     } catch (error) {
       console.error("Error fetching recipes:", error);
