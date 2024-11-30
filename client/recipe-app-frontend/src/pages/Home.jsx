@@ -3,19 +3,21 @@ import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 
 function Home({ selectedCategory }) {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [recipes, setRecipes] = useState([]); // Store recipes
+  const [loading, setLoading] = useState(false); // Track loading state
   const [error, setError] = useState(null); // Track errors if any
 
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Only allowed categories
-  const cache = useRef({}); // Cache recipes to avoid re-fetching unnecessarily
+  const cache = useRef({}); // Cache recipes to avoid unnecessary re-fetching
 
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
+  const shuffleAndLimit = (array, limit = 6) => {
+    // Shuffle and limit the array
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return array;
+    return shuffled.slice(0, limit); // Return exactly 6 recipes
   };
 
   const fetchRecipes = async () => {
@@ -23,50 +25,41 @@ function Home({ selectedCategory }) {
     setError(null);
 
     try {
-      if (selectedCategory && selectedCategory !== "") {
-        // Check cache before fetching
-        if (cache.current[selectedCategory]) {
-          setRecipes(cache.current[selectedCategory]);
-          setLoading(false);
-          return;
-        }
-
+      if (selectedCategory) {
         // Fetch recipes for the selected category
-        const response = await axios.get(
-          `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`
-        );
-        const shuffledRecipes = shuffleArray(response.data.meals); // Shuffle recipes
-        const limitedRecipes = shuffledRecipes.slice(0, 6); // Limit to 6 random recipes
-        cache.current[selectedCategory] = limitedRecipes; // Cache the result
-        setRecipes(limitedRecipes);
+        if (cache.current[selectedCategory]) {
+          // Use cached recipes
+          setRecipes(shuffleAndLimit(cache.current[selectedCategory]));
+        } else {
+          // Fetch recipes from API
+          const response = await axios.get(
+            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`
+          );
+          const fetchedRecipes = response.data.meals || [];
+          cache.current[selectedCategory] = fetchedRecipes; // Cache the result
+          setRecipes(shuffleAndLimit(fetchedRecipes)); // Shuffle and limit to 6
+        }
       } else {
         // Fetch random recipes from allowed categories
-        const randomRecipes = [];
-        for (let i = 0; i < 6; i++) {
-          const randomCategory =
-            categories[Math.floor(Math.random() * categories.length)]; // Pick a random category
+        const allRandomRecipes = [];
 
-          // Check cache for category
-          if (cache.current[randomCategory]) {
-            const randomRecipe =
-              cache.current[randomCategory][
-                Math.floor(Math.random() * cache.current[randomCategory].length)
-              ];
-            randomRecipes.push(randomRecipe);
+        for (const category of categories) {
+          if (cache.current[category]) {
+            // Use cached recipes
+            allRandomRecipes.push(...cache.current[category]);
           } else {
+            // Fetch recipes from API
             const response = await axios.get(
-              `https://www.themealdb.com/api/json/v1/1/filter.php?c=${randomCategory}`
+              `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
             );
-            const recipesFromCategory = response.data.meals;
-            cache.current[randomCategory] = recipesFromCategory; // Cache the category
-            const randomRecipe =
-              recipesFromCategory[
-                Math.floor(Math.random() * recipesFromCategory.length)
-              ];
-            randomRecipes.push(randomRecipe);
+            const fetchedRecipes = response.data.meals || [];
+            cache.current[category] = fetchedRecipes; // Cache the result
+            allRandomRecipes.push(...fetchedRecipes);
           }
         }
-        setRecipes(randomRecipes);
+
+        // Shuffle and pick 6 random recipes from all allowed categories
+        setRecipes(shuffleAndLimit(allRandomRecipes, 6));
       }
     } catch (error) {
       console.error("Error fetching recipes:", error);
@@ -86,8 +79,8 @@ function Home({ selectedCategory }) {
       {loading && <h2>Loading recipes...</h2>}
       {error && <p className="error">{error}</p>}
       <div className="recipe-grid">
-        {recipes.map((recipe, index) => (
-          <RecipeCard key={recipe.idMeal || index} recipe={recipe} />
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
       </div>
     </div>
