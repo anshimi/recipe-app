@@ -10,7 +10,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4000/api/register", {
+      const response = await axios.post(`${import.meta.env.VITE_BE_URL}/api/register`, {
         email,
         password,
       });
