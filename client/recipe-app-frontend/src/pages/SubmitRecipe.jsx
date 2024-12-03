@@ -138,7 +138,7 @@ const SubmitRecipe = () => {
           />
         </label>
         <button type="submit" className="submit-recipe-btn">
-          Submit
+          Submit Your Delicious Recipe
         </button>
       </form>
     </div>

@@ -87,7 +87,7 @@ function Home({ selectedCategory }) {
       <button submitbutton
         onClick={() => navigate("/Submit-Recipe")}
       >
-        Submit a Recipe
+        Submit your own Recipe
       </button>
     </div>
   );
