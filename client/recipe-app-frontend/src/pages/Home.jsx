@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
+import Footer from "../components/Footer";
 
 function Home({ selectedCategory }) {
   const [recipes, setRecipes] = useState([]); // Store recipes
@@ -82,6 +83,9 @@ function Home({ selectedCategory }) {
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
+      </div>
+      <div className="footer">
+          <Footer />
       </div>
     </div>
   );

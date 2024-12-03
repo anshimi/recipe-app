@@ -2,11 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <!--favicon-->
+    <link rel="icon" href="./src/assets/food-favicon_io/favicon.ico" type="image/x-icon">
+
+    <title>Recipe Haven: Recipe for all your needs!</title>
   </head>
   <body>
+ 
+    <!--javascript
+    <script>
+      function changeColorFavicon(path){
+        const link = document.querySelector("link[rel~='icon']");
+        if(!link){
+          const newLink = document.createElement('link');
+          newLink.rel = 'icon';
+          newLink.href = path;
+          document.head.appendChild(newLink)
+        } else {
+          link.href = path;
+        }
+      }
+
+      changeColorFavicon()
+    </script> -->
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
