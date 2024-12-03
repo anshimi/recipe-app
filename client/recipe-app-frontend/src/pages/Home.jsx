@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
+import { useNavigate } from "react-router-dom";
+
 function Home({ selectedCategory }) {
   const [recipes, setRecipes] = useState([]); // Store recipes
   const [loading, setLoading] = useState(false); // Track loading state
   const [error, setError] = useState(null); // Track errors if any
+  const navigate = useNavigate();
 
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Only allowed categories
   const cache = useRef({}); // Cache recipes to avoid unnecessary re-fetching
@@ -71,10 +74,6 @@ function Home({ selectedCategory }) {
   useEffect(() => {
     fetchRecipes();
   }, [selectedCategory]);
-  
-function submit() {
-  const navigate = useNavigate();
-}
   return (
     <div className="container">
       <h1>Welcome to Recipe Haven</h1>
@@ -85,8 +84,8 @@ function submit() {
           <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
       </div>
-      <button
-        onClick={() => navigate("/submit-recipe")}
+      <button submitbutton
+        onClick={() => navigate("/Submit-Recipe")}
       >
         Submit a Recipe
       </button>
