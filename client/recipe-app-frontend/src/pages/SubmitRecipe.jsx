@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../components/AuthContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -39,9 +38,14 @@ const SubmitRecipe = () => {
     }
   
     try {
-      const response = await fetch("https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}", {
-        method: "POST",
-        body: dataToSend,
+      const response = await axios.post(`${import.meta.env.VITE_BE_URL}/api/submittedrecipies`, {
+      title,
+      category,
+      prepTime,
+      serving,
+      ingredients,
+      instructions,
+      image,
       });
   
       if (response.ok) {
