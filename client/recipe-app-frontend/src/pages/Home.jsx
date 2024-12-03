@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
-import Footer from "../components/Footer";
-
+import SubmitRecipe from "./SubmitRecipe";
 function Home({ selectedCategory }) {
   const [recipes, setRecipes] = useState([]); // Store recipes
   const [loading, setLoading] = useState(false); // Track loading state
@@ -84,8 +83,10 @@ function Home({ selectedCategory }) {
           <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
       </div>
-      <div className="footer">
-          <Footer />
+      <div>
+        <Link to="/submit-recipe" >
+          Submit Your Recipe
+        </Link>
       </div>
     </div>
   );
