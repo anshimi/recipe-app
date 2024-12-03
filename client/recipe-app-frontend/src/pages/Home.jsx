@@ -71,7 +71,10 @@ function Home({ selectedCategory }) {
   useEffect(() => {
     fetchRecipes();
   }, [selectedCategory]);
-
+  
+function submit() {
+  const navigate = useNavigate();
+}
   return (
     <div className="container">
       <h1>Welcome to Recipe Haven</h1>
@@ -82,11 +85,11 @@ function Home({ selectedCategory }) {
           <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
       </div>
-      <div>
-        <Link to="/submit-recipe" >
-          Submit Your Recipe
-        </Link>
-      </div>
+      <button
+        onClick={() => navigate("/submit-recipe")}
+      >
+        Submit a Recipe
+      </button>
     </div>
   );
 }
