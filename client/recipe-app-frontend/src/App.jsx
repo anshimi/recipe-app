@@ -8,6 +8,7 @@ import Registration from "./user/Register";
 import Login from "./user/Login";
 import Profile from "./pages/Profile";
 import SubmitRecipe from "./pages/SubmitRecipe";
+import Footer from "./components/Footer";
 import axios from "axios";
 
 function App() {
@@ -33,10 +34,13 @@ function App() {
 
   return (
     <div>
-      <Navbar
-        setSelectedCategory={setSelectedCategory}
-        setSearchQuery={setSearchQuery}
-      />
+      <div className="navbar-app">
+        <Navbar
+          setSelectedCategory={setSelectedCategory}
+          setSearchQuery={setSearchQuery}
+        />
+      </div>
+      
       <Routes>
         <Route
           path="/"
@@ -58,7 +62,12 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/Submit-Recipe" element={<SubmitRecipe />} />
       </Routes>
+      
+      <div className="footer-app">
+        <Footer />
+      </div>
     </div>
+    
   );
 }
 

@@ -1,0 +1,29 @@
+.footer-component {
+    display: flex;
+    align-items: justify;
+    justify-content: space-between;
+    border-top: 2px solid #007bff;
+    padding: 15px 20px;
+    
+}
+
+.footer-component a {
+    text-decoration: none;
+}
+
+.footer-component a:hover {
+    color: #0056b3;
+}
+
+.footer-component h3 {
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    
+}
+
+.footer-component ul {
+    list-style-type: none;
+    padding: 2px;
+    
+}
