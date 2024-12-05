@@ -531,6 +531,21 @@ h2 {
 h2 {
   text-align: center;
 }
+.submitbutton {
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  cursor: pointer;
+  
+
+}
+.submitbutton:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
 
 form {
   display: flex;
@@ -543,30 +558,31 @@ label {
   font-weight: bold;
 }
 
+
 .submit-recipe-input,
 textarea,
-button {
-  width: 50%;
+button  {
+  width: 270%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
 textarea {
   resize: none;
 }
 
-button {
-  
+.submit-recipe-btn { 
   background-color: #007bff;
   color: white;
   font-size: 16px;
   border: none;
   cursor: pointer;
+  width: 20%;
 }
 
-button:hover {
-  background-color: lightgrey;
+.submit-recipe-btn:hover { 
+    background-color: #0056b3; /* Darker blue on hover */
+  
 }
 

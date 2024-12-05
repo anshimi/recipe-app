@@ -84,12 +84,13 @@ function Home({ selectedCategory }) {
           <RecipeCard key={recipe.idMeal} recipe={recipe} />
         ))}
       </div>
-      <button submitbutton
-        onClick={() => navigate("/Submit-Recipe")}
-      >
-        Submit your own Recipe
-      </button>
-    </div>
+    <div>
+    <button className="submitbutton"
+    onClick={() => navigate("/Submit-Recipe")}>
+    Submit your own Recipe
+  </button>
+  </div>
+  </div>
   );
 }
 
