@@ -539,7 +539,7 @@ h2 {
   border: none;
   cursor: pointer;
   width: 20%;
-  cursor: pointer;
+  
   
 
 }
@@ -562,7 +562,7 @@ label {
 .submit-recipe-input,
 textarea,
 button  {
-  width: 270%;
+  width: 50%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
