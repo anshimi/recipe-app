@@ -43,32 +43,34 @@ export const fetchAllRecipes = async () => {
   }
 };
 
+// Fetch recipes based on search query
 export const fetchRecipesBySearch = async (query) => {
-    try {
-      // Fetch all recipes matching the name query
-      const response = await axios.get(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=`
+  try {
+    // Fetch all recipes matching the name query
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+    );
+
+    const allRecipes = response.data.meals || [];
+
+    // Filter recipes locally to match the query across all fields (meal name, category, area, instructions)
+    const filteredRecipes = allRecipes.filter((recipe) => {
+      const meal = recipe.strMeal?.toLowerCase() || "";
+      const category = recipe.strCategory?.toLowerCase() || "";
+      const area = recipe.strArea?.toLowerCase() || "";
+      const instructions = recipe.strInstructions?.toLowerCase() || "";
+
+      return (
+        meal.includes(query.toLowerCase()) ||
+        category.includes(query.toLowerCase()) ||
+        area.includes(query.toLowerCase()) ||
+        instructions.includes(query.toLowerCase())
       );
-      const allRecipes = response.data.meals || [];
-  
-      // Filter recipes locally to match the query across all fields
-      const filteredRecipes = allRecipes.filter((recipe) => {
-        const meal = recipe.strMeal?.toLowerCase() || "";
-        const category = recipe.strCategory?.toLowerCase() || "";
-        const area = recipe.strArea?.toLowerCase() || "";
-        const instructions = recipe.strInstructions?.toLowerCase() || "";
-  
-        return (
-          meal.includes(query.toLowerCase()) ||
-          category.includes(query.toLowerCase()) ||
-          area.includes(query.toLowerCase()) ||
-          instructions.includes(query.toLowerCase())
-        );
-      });
-  
-      return filteredRecipes;
-    } catch (error) {
-      console.error(`Error fetching recipes for query: ${query}`, error);
-      return []; // Return an empty array to prevent breaking the app
-    }
-  };
+    });
+
+    return filteredRecipes;
+  } catch (error) {
+    console.error(`Error fetching recipes for query: ${query}`, error);
+    return []; // Return an empty array to prevent breaking the app
+  }
+};
