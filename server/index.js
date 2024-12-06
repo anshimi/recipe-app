@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const User = require("./models/user"); // Import the User model
+const recipeRoutes = require("./routes/Submit-Recipe");
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(cors()); // Allow requests from other origins (React)
 app.use(express.json()); // Parse incoming JSON data
+app.use(recipeRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -124,6 +126,41 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.post("/api/submittedrecipies", async (req, res) => {
+  try {
+    const { title, category, prepTime, serving, ingredients, instructions } = req.body;
+
+    // Check if an image is uploaded
+    const image = req.file ? req.file.filename : null;
+
+    const newRecipe = new Recipe({
+      title,
+      category,
+      prepTime,
+      serving,
+      ingredients,
+      instructions,
+      image,
+    });
+
+    await newRecipe.save();
+
+    res.status(201).json({ message: "Recipe submitted successfully", recipe: newRecipe });
+  } catch (error) {
+    console.error("Error submitting recipe:", error);
+    res.status(500).json({ message: "Failed to submit recipe" });
+  }
+});
+
+app.get("/api/submittedrecipes", async (req, res) => {
+  try {
+    const recipes = await Recipe.find().sort({ createdAt: -1 }); // Sort by most recent
+    res.status(200).json({ recipes });
+  } catch (error) {
+    console.error("Error fetching submitted recipes:", error);
+    res.status(500).json({ message: "Failed to fetch recipes" });
+  }
+});
 // Fetch all recipes
 app.get("/api/recipes", async (req, res) => {
   try {
