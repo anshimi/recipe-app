@@ -127,7 +127,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.post("/api/submittedrecipies", async (req, res) => {
+app.post("/api/submittedrecipes", async (req, res) => {
   try {
     const { title, category, prepTime, serving, ingredients, instructions } = req.body;
 
