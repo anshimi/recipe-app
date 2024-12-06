@@ -3,8 +3,11 @@
     align-items: justify;
     justify-content: space-between;
     border-top: 2px solid #007bff;
-    padding: 15px 20px;
-    
+    padding: 5px 10px;
+    margin: 0;
+    height: auto;
+    min-height: 40px;  
+    flex-wrap: wrap; 
 }
 
 .footer-component a {
@@ -26,4 +29,22 @@
     list-style-type: none;
     padding: 2px;
     
+}
+
+.footer-copyright {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-align: center; /* Ensure text content is centered */
+    width: 100%; /* Full width for alignment */
+    padding: 10px 0; /* Optional: Adjust padding for spacing */
+    border-top: 2px solid #007bff;
+}
+
+.footer-blurb {
+    max-width: 250px; /* Restrict width of the blurb */
+    font-size: 1rem; /* Make it slightly smaller */
+   
+    line-height: 1.4; /* Adjust spacing for readability */
+    margin-top: 10px; /* Add space below the title */
 }
