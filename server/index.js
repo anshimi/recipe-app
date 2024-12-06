@@ -5,6 +5,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const User = require("./models/user"); // Import the User model
 const recipeRoutes = require("./routes/Submit-Recipe");
+const Recipe = require("./models/recipe");
 
 dotenv.config();
 const app = express();
