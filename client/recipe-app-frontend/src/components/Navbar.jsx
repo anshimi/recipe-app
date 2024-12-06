@@ -49,6 +49,7 @@ function Navbar({ setSelectedCategory, setSearchQuery }) {
           Recipe Haven
         </Link>
       </div>
+      
       <div className="navbar-categories">
         {categories.map((category) => (
           <button
@@ -60,6 +61,7 @@ function Navbar({ setSelectedCategory, setSearchQuery }) {
           </button>
         ))}
       </div>
+
       <div className="search-bar">
         <input
           type="text"
