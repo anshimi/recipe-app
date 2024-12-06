@@ -46,12 +46,12 @@ const SubmitRecipe = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BE_URL}/api/submittedrecipies`,
+        `${import.meta.env.VITE_BE_URL}/api/submittedrecipes`,
         dataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("Recipe submitted successfully!");
         setFormData({
           title: "",

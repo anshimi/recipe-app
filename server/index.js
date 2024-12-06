@@ -5,6 +5,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const User = require("./models/user"); // Import the User model
 const recipeRoutes = require("./routes/Submit-Recipe");
+const Recipe = require("./models/recipe");
 
 dotenv.config();
 const app = express();
@@ -126,7 +127,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.post("/api/submittedrecipies", async (req, res) => {
+app.post("/api/submittedrecipes", async (req, res) => {
   try {
     const { title, category, prepTime, serving, ingredients, instructions } = req.body;
 
