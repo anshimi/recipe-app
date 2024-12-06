@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../components/AuthContext";
 
 const SubmitRecipe = () => {
+  const { user } = useContext(AuthContext); // Get user context
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -24,48 +25,53 @@ const SubmitRecipe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    if (!user) {
+      alert("Please log in to submit a recipe.");
+      return;
+    }
+
     const dataToSend = new FormData();
+    dataToSend.append("userId", user.id); // Attach the user ID
     dataToSend.append("title", formData.title);
     dataToSend.append("category", formData.category);
     dataToSend.append("prepTime", formData.prepTime);
     dataToSend.append("serving", formData.serving);
     dataToSend.append("ingredients", formData.ingredients);
     dataToSend.append("instructions", formData.instructions);
-  
+
     if (formData.image) {
-      dataToSend.append("image", formData.image); // Include the image file
+      dataToSend.append("image", formData.image);
     }
-  
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BE_URL}/api/submittedrecipies`, {
-      title,
-      category,
-      prepTime,
-      serving,
-      ingredients,
-      instructions,
-      image,
-      });
-  
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Recipe submitted successfully:", result);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BE_URL}/api/submittedrecipies`,
+        dataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      if (response.status === 200) {
         alert("Recipe submitted successfully!");
-      } else {
-        console.error("Error submitting recipe:", response.statusText);
-        alert("Failed to submit the recipe. Please try again.");
+        setFormData({
+          title: "",
+          category: "",
+          prepTime: "",
+          serving: "",
+          ingredients: "",
+          instructions: "",
+          image: null,
+        });
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting recipe:", error);
       alert("An error occurred while submitting the recipe.");
     }
   };
-  
 
   return (
     <div className="submit-recipe-container">
-      <h1 className="submit-recipe-title">Recipe Submission</h1>
+      <h1 className="submit-recipe-title">Submit Your Recipe</h1>
       <form className="submit-recipe-form" onSubmit={handleSubmit}>
         <label>
           Recipe Title:
@@ -138,7 +144,7 @@ const SubmitRecipe = () => {
           />
         </label>
         <button type="submit" className="submit-recipe-btn">
-          Submit Your Delicious Recipe
+          Submit Recipe
         </button>
       </form>
     </div>
