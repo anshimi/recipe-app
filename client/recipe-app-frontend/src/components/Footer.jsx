@@ -37,8 +37,9 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
               {categories.map((category) => (
                 <li key={category}>
                   <Link
-                    to={`/category/${category.toLowerCase()}`}
-                    onClick={() => handleCategoryClick(category)}
+                    key={category}
+            className="footer-link"
+            onClick={() => handleCategoryClick(category)}
                   >
                     {category}
                   </Link>
