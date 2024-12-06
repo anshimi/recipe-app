@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../App.css"; // Assuming styles are in App.css or another CSS file
+import { AuthContext } from "../components/AuthContext"; // Import AuthContext
+import "../App.css";
 
 function RecipeDetails() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [notification, setNotification] = useState(""); // Notification for favorites
+  const { user, addFavorite } = useContext(AuthContext); // Access user and addFavorite
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -24,6 +27,36 @@ function RecipeDetails() {
 
     fetchRecipe();
   }, [id]);
+
+  const handleAddFavorite = async () => {
+    if (!user) {
+      setNotification("Please log in to add to favorites!");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BE_URL}/api/add-favorite`,
+        {
+          userId: user.id,
+          recipe: {
+            id: recipe.idMeal,
+            name: recipe.strMeal,
+          },
+        }
+      );
+
+      addFavorite({ id: recipe.idMeal, name: recipe.strMeal });
+      setNotification("Recipe added to favorites!");
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      if (error.response && error.response.data.message) {
+        setNotification(error.response.data.message); // Graceful error message
+      } else {
+        setNotification("Failed to add recipe to favorites.");
+      }
+    }
+  };
 
   if (loading) {
     return <h2>Loading Recipe Details...</h2>;
@@ -73,7 +106,10 @@ function RecipeDetails() {
           </ul>
           <h2 className="section-heading">Recipe</h2>
           <p className="recipe-instructions">{recipe.strInstructions}</p>
-          <button className="favorite-button">Add to Favorites</button>
+          <button className="favorite-button" onClick={handleAddFavorite}>
+            Add to Favorites
+          </button>
+          {notification && <p className="notification">{notification}</p>}
         </div>
       </div>
     </div>
