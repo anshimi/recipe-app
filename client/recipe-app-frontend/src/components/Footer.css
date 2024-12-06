@@ -11,7 +11,7 @@
 }
 
 .footer-blurb {
-    max-width: 450px; 
+    max-width:450px ; 
     line-height: 1.4;
     margin-top: 10px; 
 }
@@ -45,4 +45,18 @@
     border-top: 2px solid #007bff;
 }
 
+.footer-link {
+ 
+    border: none; 
+    color: #007bff; 
+    text-decoration: underline; /* Adds underline for link style */
+    cursor: pointer; /* Changes the cursor to a pointer */
+    font: inherit; /* Ensures the button inherits the font style */
+    padding: 0; /* Removes default padding */
+  }
+  
+  .footer-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: none; /* Removes underline on hover */
+  }
 
