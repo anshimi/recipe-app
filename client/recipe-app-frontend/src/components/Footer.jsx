@@ -17,7 +17,7 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setSearchQuery("");
-    navigate(`/category/${category.toLowerCase()}`); // Navigate to dynamic route
+    navigate(`/category/${category.toLowerCase()}`); 
   };
 
   return (
@@ -27,7 +27,7 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
           <Link to="/" onClick={handleLogoClick}>
             <h3>Recipe Haven</h3>
           </Link>
-          <p className="footer-blurb"><strong>Recipe Haven</strong> is your ultimate destination for discovering delicious, easy-to-follow recipes tailored to every taste. Whether you're cooking for a family dinner or exploring new cuisines, we provide inspiration and guidance to make every meal special. Join us in turning everyday ingredients into extraordinary dishes!</p>
+          <p className="footer-blurb"><strong>Recipe Haven</strong> delicious recipes tailored to your taste. From savory dishes to healthy options, Recipe Haven is your one-stop platform for culinary inspiration.</p>
         </div>
 
         <div className="footer-section">
@@ -50,7 +50,9 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
 
         <div className="footer-section">
           <h3>Contact us</h3>
-          <p>email@recipehaven.ca</p>
+          <p>
+            <a href="mailto:email@recipehaven.ca">email@recipehaven.ca</a>
+            </p>
           <p>
             201 James St N
             <br />
