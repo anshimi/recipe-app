@@ -64,7 +64,31 @@ function App() {
       </Routes>
       
       <div className="footer-app">
-        <Footer />
+        <Footer 
+          setSelectedCategory={setSelectedCategory}
+          setSearchQuery={setSearchQuery}
+          selectedCategory={selectedCategory}
+          fetchRecipesByCategory={async (category) => {
+            try {
+              const response = await axios.get(
+                `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+              );
+              setRecipes(response.data.meals || []);
+            } catch (error) {
+              console.error("Error fetching recipes by category:", error);
+            }
+          }}
+          fetchAllRecipes={async () => {
+            try {
+              const response = await axios.get(
+                "https://www.themealdb.com/api/json/v1/1/search.php?s="
+              );
+              setRecipes(response.data.meals || []);
+            } catch (error) {
+              console.error("Error fetching all recipes:", error);
+            }
+          }}
+        />
       </div>
     </div>
     

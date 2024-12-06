@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import "./Footer.css";
 
-function Footer({ setSelectedCategory, setSearchQuery }) {
+function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRecipesByCategory, fetchAllRecipes }) {
   const navigate = useNavigate();
 
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"];
@@ -15,10 +15,14 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setSearchQuery("");
-    navigate(`/category/${category.toLowerCase()}`); 
+    setSelectedCategory(category); // Set the selected category
+    setSearchQuery(""); // Clear the search query
+    navigate("/"); // Always navigate to the homepage
   };
+
+  useEffect(() => {
+    console.log("Selected Category:", selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <div>
@@ -27,7 +31,9 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
           <Link to="/" onClick={handleLogoClick}>
             <h3>Recipe Haven</h3>
           </Link>
-          <p className="footer-blurb"><strong>Recipe Haven</strong> delicious recipes tailored to your taste. From savory dishes to healthy options, Recipe Haven is your one-stop platform for culinary inspiration.</p>
+          <p className="footer-blurb">
+            <strong>Recipe Haven</strong> delicious recipes tailored to your taste. From savory dishes to healthy options, Recipe Haven is your one-stop platform for culinary inspiration.
+          </p>
         </div>
 
         <div className="footer-section">
@@ -36,13 +42,12 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
             <ul>
               {categories.map((category) => (
                 <li key={category}>
-                  <Link
-                    key={category}
-            className="footer-link"
-            onClick={() => handleCategoryClick(category)}
+                  <button
+                    className="footer-link"
+                    onClick={() => handleCategoryClick(category)}
                   >
                     {category}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -53,7 +58,7 @@ function Footer({ setSelectedCategory, setSearchQuery }) {
           <h3>Contact us</h3>
           <p>
             <a href="mailto:email@recipehaven.ca">email@recipehaven.ca</a>
-            </p>
+          </p>
           <p>
             201 James St N
             <br />

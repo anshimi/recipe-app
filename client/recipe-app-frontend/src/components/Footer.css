@@ -46,17 +46,15 @@
 }
 
 .footer-link {
- 
-    border: none; 
-    color: #007bff; 
-    text-decoration: underline; /* Adds underline for link style */
-    cursor: pointer; /* Changes the cursor to a pointer */
-    font: inherit; /* Ensures the button inherits the font style */
-    padding: 0; /* Removes default padding */
+    background: none;
+    border: none;
+    color: blue;
+  
+    cursor: pointer;
+    font-size: inherit;
   }
   
   .footer-link:hover {
-    color: #0056b3; /* Darker blue on hover */
-    text-decoration: none; /* Removes underline on hover */
+    color: darkblue;
+    text-decoration: none;
   }
-
