@@ -4,17 +4,19 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const User = require("./models/user"); // Import the User model
-const recipeRoutes = require("./routes/Submit-Recipe");
 const Recipe = require("./models/recipe");
+const fileUpload = require('express-fileupload') // ** INSTALL THIS PACKAGE
+const bodyParser = require('body-parser') // ** INSTALL THIS PACKAGE
 
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 4000;
+dotenv.config()
+const app = express()
+const PORT = process.env.PORT || 4000
 
 // Middleware
-app.use(cors()); // Allow requests from other origins (React)
-app.use(express.json()); // Parse incoming JSON data
-app.use(recipeRoutes);
+app.use(cors()) // Allow requests from other origins (React)
+app.use(express.json()) // Parse incoming JSON data
+app.use(fileUpload()) // ** ADD THIS
+app.use(bodyParser.urlencoded({ extended: true })) // ** ADD THIS
 
 mongoose
   .connect(process.env.MONGO_URI)
