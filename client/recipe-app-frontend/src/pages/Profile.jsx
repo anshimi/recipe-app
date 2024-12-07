@@ -67,8 +67,8 @@ function Profile() {
       <h3>Your Submitted Recipes</h3>
       {submittedRecipes.length > 0 ? (
         <div className="recipe-grid">
-          {submittedRecipes.map((recipe) => (
-            <div className="recipe-card" key={recipe._id}>
+          {submittedRecipes.map((recipe, index) => (
+            <div className="recipe-card" key={index}>
               <img
                 src={
                   recipe.image
@@ -82,6 +82,8 @@ function Profile() {
               <p><strong>Category:</strong> {recipe.category}</p>
               <p><strong>Prep Time:</strong> {recipe.prepTime}</p>
               <p><strong>Serving:</strong> {recipe.serving}</p>
+              <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+              <p><strong>Instructions:</strong> {recipe.instructions}</p>
             </div>
           ))}
         </div>

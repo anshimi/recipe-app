@@ -18,6 +18,18 @@ const userSchema = new mongoose.Schema({
       name: String,
     },
   ],
+  submittedRecipes: [
+    {
+      title: String,
+      category: String,
+      prepTime: String,
+      serving: Number,
+      ingredients: String,
+      instructions: String,
+      image: String, // URL of the image if applicable
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

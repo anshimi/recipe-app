@@ -130,13 +130,18 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.post("/api/submittedrecipes", async (req, res) => {
+  const { userId, title, category, prepTime, serving, ingredients, instructions } = req.body;
+  const image = req.file ? req.file.filename : null;
+
   try {
-    const { title, category, prepTime, serving, ingredients, instructions } = req.body;
+    // Find the user
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    // Check if an image is uploaded
-    const image = req.file ? req.file.filename : null;
-
-    const newRecipe = new Recipe({
+    // Add the submitted recipe to the user's submittedRecipes
+    const newRecipe = {
       title,
       category,
       prepTime,
@@ -144,16 +149,18 @@ app.post("/api/submittedrecipes", async (req, res) => {
       ingredients,
       instructions,
       image,
-    });
+    };
 
-    await newRecipe.save();
+    user.submittedRecipes.push(newRecipe);
+    await user.save();
 
-    res.status(201).json({ message: "Recipe submitted successfully", recipe: newRecipe });
+    res.status(201).json({ message: "Recipe submitted successfully", submittedRecipes: user.submittedRecipes });
   } catch (error) {
     console.error("Error submitting recipe:", error);
-    res.status(500).json({ message: "Failed to submit recipe" });
+    res.status(500).json({ message: "Server error" });
   }
 });
+
 
 app.get("/api/submittedrecipes", async (req, res) => {
   try {
@@ -188,9 +195,16 @@ app.get("/api/profile/:userId", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({ user: { email: user.email, favorites: user.favorites } });
+    res.status(200).json({
+      user: {
+        email: user.email,
+        favorites: user.favorites,
+        submittedRecipes: user.submittedRecipes,
+      },
+    });
   } catch (error) {
     console.error("Error fetching profile:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
+
