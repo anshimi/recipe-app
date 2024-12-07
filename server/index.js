@@ -134,6 +134,7 @@ app.post("/api/submittedrecipes", async (req, res) => {
   const image = req.file ? req.file.filename : null;
 
   try {
+<<<<<<< HEAD
     // Find the user
     const user = await User.findById(userId);
     if (!user) {
@@ -142,6 +143,19 @@ app.post("/api/submittedrecipes", async (req, res) => {
 
     // Add the submitted recipe to the user's submittedRecipes
     const newRecipe = {
+=======
+    const { userId, title, category, prepTime, serving, ingredients, instructions } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    // Handle file upload if an image is provided
+    const image = req.file ? `/uploads/${req.file.filename}` : null;
+
+    const newRecipe = new Recipe({
+      userId,
+>>>>>>> c3ec92f706aa9093ca20798fdc57abfc3536f0ab
       title,
       category,
       prepTime,
@@ -164,7 +178,12 @@ app.post("/api/submittedrecipes", async (req, res) => {
 
 app.get("/api/submittedrecipes", async (req, res) => {
   try {
-    const recipes = await Recipe.find().sort({ createdAt: -1 }); // Sort by most recent
+    const { userId } = req.query; // Get userId from query parameters
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    const recipes = await Recipe.find({ userId }).sort({ createdAt: -1 }); // Filter recipes by userId
     res.status(200).json({ recipes });
   } catch (error) {
     console.error("Error fetching submitted recipes:", error);
@@ -208,3 +227,34 @@ app.get("/api/profile/:userId", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+app.delete('/api/favorites/:userId/:recipeId', async (req, res) => {
+  const { userId, recipeId } = req.params;
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.favorites = user.favorites.filter(
+      (favorite) => favorite.id !== recipeId
+    );
+    await user.save();
+
+    res.status(200).json({ message: 'Favorite removed', favorites: user.favorites });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.delete('/api/submittedrecipes/:recipeId', async (req, res) => {
+  const { recipeId } = req.params;
+  try {
+    await Recipe.findByIdAndDelete(recipeId);
+    res.status(200).json({ message: 'Recipe removed' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+>>>>>>> c3ec92f706aa9093ca20798fdc57abfc3536f0ab
