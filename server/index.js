@@ -147,7 +147,7 @@ app.post("/api/submittedrecipes", async (req, res) => {
       serving,
       ingredients,
       instructions,
-      image,
+      
     });
 
     await newRecipe.save();

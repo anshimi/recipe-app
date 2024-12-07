@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../components/AuthContext";
 import { Link } from "react-router-dom";
-import Favicon from "../assets/food-favicon_io/favicon.ico";
 
 function Profile() {
   const { user } = useContext(AuthContext);
@@ -22,7 +21,7 @@ function Profile() {
         // Fetch submitted recipes
         const submittedResponse = await axios.get(
           `${import.meta.env.VITE_BE_URL}/api/submittedrecipes`,
-          { params: { userId: user.id } } // Pass userId as a query parameter
+          { params: { userId: user.id } }
         );
         setSubmittedRecipes(submittedResponse.data.recipes);
   
@@ -100,46 +99,36 @@ function Profile() {
 
       {/* Submitted Recipes Section */}
       <section className="submitted-section">
-  <h3>Your Submitted Recipes</h3>
-  {submittedRecipes.length > 0 ? (
-    <div className="recipe-grid">
-      {submittedRecipes.map((recipe) => (
-        <div className="recipe-card" key={recipe._id}>
-          <img
-            src={
-              recipe.image
-                ? `${import.meta.env.VITE_BE_URL}${recipe.image}`
-                : Favicon
-            }
-            alt={recipe.title}
-            className="profile-recipe-image"
-          />
-          <div className="recipe-details">
-            <h4>{recipe.title}</h4>
-            <p>
-              <strong>Category:</strong> {recipe.category}
-            </p>
-            <p>
-              <strong>Prep Time:</strong> {recipe.prepTime}
-            </p>
-            <p>
-              <strong>Serving:</strong> {recipe.serving}
-            </p>
-            <button
-              className="remove-button"
-              onClick={() => removeSubmittedRecipe(recipe._id)}
-            >
-              Remove
-            </button>
+        <h3>Your Submitted Recipes</h3>
+        {submittedRecipes.length > 0 ? (
+          <div className="recipe-grid">
+            {submittedRecipes.map((recipe) => (
+              <div className="recipe-card" key={recipe._id}>
+                <div className="recipe-details">
+                  <h4>{recipe.title}</h4>
+                  <p>
+                    <strong>Category:</strong> {recipe.category}
+                  </p>
+                  <p>
+                    <strong>Prep Time:</strong> {recipe.prepTime}
+                  </p>
+                  <p>
+                    <strong>Serving:</strong> {recipe.serving}
+                  </p>
+                  <button
+                    className="remove-button"
+                    onClick={() => removeSubmittedRecipe(recipe._id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
-  ) : (
-    <p>You have not submitted any recipes yet.</p>
-  )}
-</section>
-
+        ) : (
+          <p>You have not submitted any recipes yet.</p>
+        )}
+      </section>
     </div>
   );
 }

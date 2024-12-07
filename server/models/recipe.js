@@ -7,7 +7,6 @@ const recipeSchema = new mongoose.Schema({
   serving: { type: Number },
   ingredients: { type: String, required: true },
   instructions: { type: String, required: true },
-  image: { type: String }, // URL to the uploaded image
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Ensure `userId` is required
   createdAt: { type: Date, default: Date.now },
 });
