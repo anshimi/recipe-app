@@ -5,18 +5,18 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const User = require("./models/user"); // Import the User model
 const Recipe = require("./models/recipe");
-const fileUpload = require('express-fileupload') // ** INSTALL THIS PACKAGE
-const bodyParser = require('body-parser') // ** INSTALL THIS PACKAGE
+const fileUpload = require("express-fileupload"); // ** INSTALL THIS PACKAGE
+const bodyParser = require("body-parser"); // ** INSTALL THIS PACKAGE
 
-dotenv.config()
-const app = express()
-const PORT = process.env.PORT || 4000
+dotenv.config();
+const app = express();
+const PORT = process.env.PORT || 4000;
 
 // Middleware
-app.use(cors()) // Allow requests from other origins (React)
-app.use(express.json()) // Parse incoming JSON data
-app.use(fileUpload()) // ** ADD THIS
-app.use(bodyParser.urlencoded({ extended: true })) // ** ADD THIS
+app.use(cors()); // Allow requests from other origins (React)
+app.use(express.json()); // Parse incoming JSON data
+app.use(fileUpload()); // ** ADD THIS
+app.use(bodyParser.urlencoded({ extended: true })); // ** ADD THIS
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -55,6 +55,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
+// Add to Favorites API
 app.post("/api/add-favorite", async (req, res) => {
   const { userId, recipe } = req.body;
 
@@ -81,8 +82,7 @@ app.post("/api/add-favorite", async (req, res) => {
   }
 });
 
-
-
+// Get Favorites API
 app.get("/api/favorites/:userId", async (req, res) => {
   const { userId } = req.params;
 
@@ -98,7 +98,6 @@ app.get("/api/favorites/:userId", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 // Login API
 app.post("/api/login", async (req, res) => {
@@ -129,33 +128,19 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+// Submit Recipe API
 app.post("/api/submittedrecipes", async (req, res) => {
   const { userId, title, category, prepTime, serving, ingredients, instructions } = req.body;
-  const image = req.file ? req.file.filename : null;
+  const image = req.file ? `/uploads/${req.file.filename}` : null;
 
   try {
-<<<<<<< HEAD
-    // Find the user
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Add the submitted recipe to the user's submittedRecipes
-    const newRecipe = {
-=======
-    const { userId, title, category, prepTime, serving, ingredients, instructions } = req.body;
-
-    if (!userId) {
-      return res.status(400).json({ message: "User ID is required" });
-    }
-
-    // Handle file upload if an image is provided
-    const image = req.file ? `/uploads/${req.file.filename}` : null;
-
     const newRecipe = new Recipe({
       userId,
->>>>>>> c3ec92f706aa9093ca20798fdc57abfc3536f0ab
       title,
       category,
       prepTime,
@@ -163,19 +148,18 @@ app.post("/api/submittedrecipes", async (req, res) => {
       ingredients,
       instructions,
       image,
-    };
+    });
 
-    user.submittedRecipes.push(newRecipe);
-    await user.save();
+    await newRecipe.save();
 
-    res.status(201).json({ message: "Recipe submitted successfully", submittedRecipes: user.submittedRecipes });
+    res.status(201).json({ message: "Recipe submitted successfully" });
   } catch (error) {
     console.error("Error submitting recipe:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
-
+// Get Submitted Recipes API
 app.get("/api/submittedrecipes", async (req, res) => {
   try {
     const { userId } = req.query; // Get userId from query parameters
@@ -190,21 +174,8 @@ app.get("/api/submittedrecipes", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch recipes" });
   }
 });
-// Fetch all recipes
-app.get("/api/recipes", async (req, res) => {
-  try {
-    const recipes = [
-      // Example static data (replace with database logic if needed)
-      { id: "1", strMeal: "Spaghetti", strMealThumb: "link-to-image" },
-      { id: "2", strMeal: "Tacos", strMealThumb: "link-to-image" },
-    ];
-    res.status(200).json(recipes);
-  } catch (error) {
-    console.error("Error fetching recipes:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-});
 
+// Get Profile API
 app.get("/api/profile/:userId", async (req, res) => {
   const { userId } = req.params;
 
@@ -227,34 +198,31 @@ app.get("/api/profile/:userId", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-=======
-app.delete('/api/favorites/:userId/:recipeId', async (req, res) => {
+// Remove from Favorites API
+app.delete("/api/favorites/:userId/:recipeId", async (req, res) => {
   const { userId, recipeId } = req.params;
   try {
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    user.favorites = user.favorites.filter(
-      (favorite) => favorite.id !== recipeId
-    );
+    user.favorites = user.favorites.filter((favorite) => favorite.id !== recipeId);
     await user.save();
 
-    res.status(200).json({ message: 'Favorite removed', favorites: user.favorites });
+    res.status(200).json({ message: "Favorite removed", favorites: user.favorites });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
-app.delete('/api/submittedrecipes/:recipeId', async (req, res) => {
+// Delete Submitted Recipe API
+app.delete("/api/submittedrecipes/:recipeId", async (req, res) => {
   const { recipeId } = req.params;
   try {
     await Recipe.findByIdAndDelete(recipeId);
-    res.status(200).json({ message: 'Recipe removed' });
+    res.status(200).json({ message: "Recipe removed" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
->>>>>>> c3ec92f706aa9093ca20798fdc57abfc3536f0ab

@@ -99,75 +99,47 @@ function Profile() {
       </section>
 
       {/* Submitted Recipes Section */}
-<<<<<<< HEAD
-      <h3>Your Submitted Recipes</h3>
-      {submittedRecipes.length > 0 ? (
-        <div className="recipe-grid">
-          {submittedRecipes.map((recipe, index) => (
-            <div className="recipe-card" key={index}>
-              <img
-                src={
-                  recipe.image
-                    ? `${import.meta.env.VITE_BE_URL}/uploads/${recipe.image}`
-                    : "/default-image.jpg"
-                }
-                alt={recipe.title}
-                className="recipe-image"
-              />
-              <h3>{recipe.title}</h3>
-              <p><strong>Category:</strong> {recipe.category}</p>
-              <p><strong>Prep Time:</strong> {recipe.prepTime}</p>
-              <p><strong>Serving:</strong> {recipe.serving}</p>
-              <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-              <p><strong>Instructions:</strong> {recipe.instructions}</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>You have not submitted any recipes yet.</p>
-      )}
-=======
       <section className="submitted-section">
-        <h3>Your Submitted Recipes</h3>
-        {submittedRecipes.length > 0 ? (
-          <div className="recipe-grid">
-            {submittedRecipes.map((recipe) => (
-              <div className="recipe-card" key={recipe._id}>
-                <img
-                  src={
-                    recipe.image
-                      ? `${import.meta.env.VITE_BE_URL}${recipe.image}`
-                      :  Favicon
-                  }
-                  alt={recipe.title}
-                  className="profile-recipe-image"
-                />
-                <div className="recipe-details">
-                  <h4>{recipe.title}</h4>
-                  <p>
-                    <strong>Category:</strong> {recipe.category}
-                  </p>
-                  <p>
-                    <strong>Prep Time:</strong> {recipe.prepTime}
-                  </p>
-                  <p>
-                    <strong>Serving:</strong> {recipe.serving}
-                  </p>
-                  <button
-                    className="remove-button"
-                    onClick={() => removeSubmittedRecipe(recipe._id)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
+  <h3>Your Submitted Recipes</h3>
+  {submittedRecipes.length > 0 ? (
+    <div className="recipe-grid">
+      {submittedRecipes.map((recipe) => (
+        <div className="recipe-card" key={recipe._id}>
+          <img
+            src={
+              recipe.image
+                ? `${import.meta.env.VITE_BE_URL}${recipe.image}`
+                : Favicon
+            }
+            alt={recipe.title}
+            className="profile-recipe-image"
+          />
+          <div className="recipe-details">
+            <h4>{recipe.title}</h4>
+            <p>
+              <strong>Category:</strong> {recipe.category}
+            </p>
+            <p>
+              <strong>Prep Time:</strong> {recipe.prepTime}
+            </p>
+            <p>
+              <strong>Serving:</strong> {recipe.serving}
+            </p>
+            <button
+              className="remove-button"
+              onClick={() => removeSubmittedRecipe(recipe._id)}
+            >
+              Remove
+            </button>
           </div>
-        ) : (
-          <p>You have not submitted any recipes yet.</p>
-        )}
-      </section>
->>>>>>> c3ec92f706aa9093ca20798fdc57abfc3536f0ab
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p>You have not submitted any recipes yet.</p>
+  )}
+</section>
+
     </div>
   );
 }
