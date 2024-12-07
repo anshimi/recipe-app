@@ -21,59 +21,59 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  flex-wrap: wrap; 
   padding: 15px 20px;
-  background-color: #ffffff; /* Clean white background */
-  border-bottom: 2px solid #007bff; /* Blue border */
-  font-family: 'Arial', sans-serif; /* Consistent font */
+  background-color: #ffffff; 
+  border-bottom: 2px solid #007bff; 
+  font-family: 'Arial', sans-serif; 
   gap: 10px;
 }
 
 .navbar-logo a {
-  font-size: 1.9rem; /* Slightly larger for prominence */
+  font-size: 1.9rem; 
   font-weight: bold;
   text-decoration: none;
-  color: #007bff; /* Matches the border color */
+  color: #007bff; 
   transition: color 0.3s ease;
 }
 
 .navbar-logo a:hover {
-  color: #0056b3; /* Darker blue on hover */
+  color: #0056b3; 
 }
 
 /* Categories - Inline with Search Bar */
 .navbar-categories {
-  display: flex; /* Align categories side by side */
-  gap: 15px; /* Space between each category */
-  margin-right: 10px; /* Add spacing between categories and search bar */
+  display: flex; 
+  gap: 15px; 
+  margin-right: 10px; 
 }
 
 .category-link {
   font-size: 1rem;
-  text-decoration: none; /* Removes underline */
-  color: #333; /* Default text color */
+  text-decoration: none; 
+  color: #333; 
   padding: 8px 15px;
-  border: 1px solid #ddd; /* Subtle border */
-  border-radius: 5px; /* Rounded corners */
-  background-color: #f8f9fa; /* Light gray background */
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  background-color: #f8f9fa; 
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
 
 .category-link:hover {
-  background-color: #007bff; /* Highlight on hover */
-  color: white; /* White text on hover */
-  border: 1px solid #0056b3; /* Blue border on hover */
+  background-color: #007bff; 
+  color: white; 
+  border: 1px solid #0056b3; 
 }
 
 .selected-category {
-  background-color: #007bff; /* Highlighted background */
-  color: white; /* Text color for selected category */
-  border: 1px solid #0056b3; /* Blue border for selected */
+  background-color: #007bff; 
+  color: white; 
+  border: 1px solid #0056b3; 
 }
 
 .category-link:focus {
-  outline: none; /* Removes default browser focus outline */
-  border: 1px solid #0056b3; /* Consistent styling with hover */
+  outline: none; 
+  border: 1px solid #0056b3; 
 }
 
 /* Search Bar Styles */
@@ -83,8 +83,8 @@ h2 {
   border: 1px solid #ddd;
   border-radius: 5px;
   overflow: hidden;
-  flex-grow: 0; /* Prevents it from growing too wide */
-  width: 300px; /* Sets a specific width for the search bar */
+  flex-grow: 0; 
+  width: 300px; 
 }
 
 .search-bar input {
@@ -96,7 +96,7 @@ h2 {
 }
 
 .search-bar input::placeholder {
-  color: #aaa; /* Placeholder text color */
+  color: #aaa; 
 }
 
 .search-bar button {
@@ -166,7 +166,7 @@ h2 {
   }
 
   .search-bar {
-    width: 100%; /* Full width for smaller screens */
+    width: 100%; 
   }
 
   .navbar-auth {
@@ -178,7 +178,7 @@ h2 {
 /* Recipe Grid */
 .recipe-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
@@ -187,6 +187,10 @@ h2 {
 
 /* Recipe Card */
 .recipe-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
@@ -205,11 +209,13 @@ h2 {
   object-fit: cover;
   border-radius: 8px;
 }
+
 .recipe-actions {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: auto; 
+  padding-top: 10px;
 }
 
 .recipe-actions button {
@@ -219,6 +225,8 @@ h2 {
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
+  background-color: #007bff;
+  color: white;
 }
 
 .recipe-card h3 {
@@ -238,7 +246,7 @@ h2 {
   font-size: 0.9rem;
 }
 
-.recipe-card button:hover {
+.recipe-actions button:hover {
   background-color: #0056b3;
 }
 
@@ -246,42 +254,42 @@ h2 {
 @media (max-width: 1024px) {
   /* For tablets or smaller desktops */
   .recipe-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media (max-width: 768px) {
   /* For small tablets */
   .recipe-grid {
-    grid-template-columns: repeat(2, 1fr); /* Still 2 cards per row */
+    grid-template-columns: repeat(2, 1fr); 
   }
 
   .recipe-card h3 {
-    font-size: 1rem; /* Adjusted font size */
+    font-size: 1rem; 
   }
 
   .recipe-card button {
-    font-size: 0.8rem; /* Smaller button text */
+    font-size: 0.8rem; 
   }
 }
 
 @media (max-width: 480px) {
   /* For mobile devices */
   .recipe-grid {
-    grid-template-columns: repeat(1, 1fr); /* 1 card per row */
+    grid-template-columns: repeat(1, 1fr); 
   }
 
   .recipe-card img {
-    height: 100px; /* Adjusted image height */
+    height: 100px; 
   }
 
   .recipe-card h3 {
-    font-size: 0.9rem; /* Smaller title text */
+    font-size: 0.9rem; 
   }
 
   .recipe-card button {
-    font-size: 0.7rem; /* Smaller button text */
-    padding: 6px 10px; /* Smaller padding for buttons */
+    font-size: 0.7rem; 
+    padding: 6px 10px; 
   }
 }
 
@@ -522,12 +530,12 @@ h2 {
 
 .notification {
   margin-top: 10px;
-  color: #28a745; /* Green for success */
+  color: #28a745; 
   font-size: 0.9rem;
 }
 
 .notification.error {
-  color: #dc3545; /* Red for errors */
+  color: #dc3545; 
 }
 
 .auth-container {
@@ -599,7 +607,7 @@ h2 {
     font-size: 0.9rem;
 }
 .submitbutton:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 
 .notification {
@@ -679,7 +687,7 @@ h2 {
   border-radius: 4px;
   font-size: 14px;
   color: #333;
-  width: 70%; /* Adjust input width to fit the labels */
+  width: 70%; 
 }
 
 .submit-recipe-btn{
@@ -697,11 +705,11 @@ h2 {
 }
 
 .submit-recipe-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 .profile-recipe-image {
   width: 50% !important; 
-  height: 150px; /* Set a fixed height for uniformity */
-  object-fit: cover; /* Ensures the image maintains its aspect ratio and crops to fit */
-  border-radius: 5px; /* Optional: Add rounded corners */
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 5px; 
 }
