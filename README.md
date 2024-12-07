@@ -45,7 +45,8 @@ Environment Variables
 Create a .env file in the root directories for both frontend and backend. Include the following variables:
 
 Backend .env:
-MONGO_URI="mongodb+srv://annyashimi:r6DsjD7jBSLFCJdF@comp229.i4iyt.mongodb.net/"
+MONGO_URI=your_mongodb_connection_string
+(For security reason I am not allowed to provide the link)
 Frontend .env:
 VITE_BE_URL=http://localhost:4000
 
