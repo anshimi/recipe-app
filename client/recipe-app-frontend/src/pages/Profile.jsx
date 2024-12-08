@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../components/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Profile() {
   const { user } = useContext(AuthContext);
   const [favorites, setFavorites] = useState([]);
   const [submittedRecipes, setSubmittedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -17,21 +18,21 @@ function Profile() {
           `${import.meta.env.VITE_BE_URL}/api/profile/${user.id}`
         );
         setFavorites(favoritesResponse.data.user.favorites || []);
-  
+
         // Fetch submitted recipes
         const submittedResponse = await axios.get(
           `${import.meta.env.VITE_BE_URL}/api/submittedrecipes`,
           { params: { userId: user.id } }
         );
         setSubmittedRecipes(submittedResponse.data.recipes);
-  
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching profile data:", error);
         setLoading(false);
       }
     };
-  
+
     if (user) {
       fetchProfileData();
     }
@@ -99,7 +100,15 @@ function Profile() {
 
       {/* Submitted Recipes Section */}
       <section className="submitted-section">
-        <h3>Your Submitted Recipes</h3>
+        <div className="section-header">
+          <h3>Your Submitted Recipes</h3>
+          <button
+            className="submitbutton"
+            onClick={() => navigate("/Submit-Recipe")}
+          >
+            Submit Your Recipe
+          </button>
+        </div>
         {submittedRecipes.length > 0 ? (
           <div className="recipe-grid">
             {submittedRecipes.map((recipe) => (
@@ -114,6 +123,12 @@ function Profile() {
                   </p>
                   <p>
                     <strong>Serving:</strong> {recipe.serving}
+                  </p>
+                  <p>
+                    <strong>Ingredients:</strong> {recipe.ingredients}
+                  </p>
+                  <p>
+                    <strong>Instructions:</strong> {recipe.instructions}
                   </p>
                   <button
                     className="remove-button"
