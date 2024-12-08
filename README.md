@@ -34,7 +34,7 @@ Backend:
 
 Setup Instructions
 
-Prerequisites
+Prerequisites:
 
 - Install Node.js
 - Install MongoDB
@@ -42,25 +42,32 @@ Prerequisites
   git clone https://github.com/anshimi/recipe-app.git
 
 Environment Variables
+
 Create a .env file in the root directories for both frontend and backend. Include the following variables:
 
-Backend .env:
+- Backend .env:
+
 MONGO_URI=your_mongodb_connection_string
 (For security reason I am not allowed to provide the link)
-Frontend .env:
+
+- Frontend .env:
+
 VITE_BE_URL=http://localhost:4000
 
 Running the Application
 
 Step 1: Install Dependencies
+
 Navigate to the backend and frontend directories and run the following command to install all required dependencies:
 npm install
 
 Step 2: Start the Backend
+
 Go to the server directory and run the backend using:
 node index.js
 
 Step 3: Start the Frontend
+
 npm run dev
 
 Folder Structure
@@ -135,48 +142,57 @@ Submit Recipes
 API Endpoints
 
 User Management
-POST /api/register: Register a new user.
-POST /api/login: Login a user.
-ET /api/profile/:userId: Fetch profile details
+
+- POST /api/register: Register a new user.
+- POST /api/login: Login a user.
+- GET /api/profile/:userId: Fetch profile details
 
 Favorites
-GET /api/favorites/:userId: Get a user’s favorite recipes.
-POST /api/add-favorite: Add a recipe to favorites.
-DELETE /api/favorites/:userId/:recipeId: Remove a recipe from favorites.
+
+- GET /api/favorites/:userId: Get a user’s favorite recipes.
+- POST /api/add-favorite: Add a recipe to favorites.
+- DELETE /api/favorites/:userId/:recipeId: Remove a recipe from favorites.
 
 Submitted Recipes
-POST /api/submittedrecipes: Submit a new recipe.
-GET /api/submittedrecipes: Get user-submitted recipes.
-DELETE /api/submittedrecipes/:recipeId: Delete a submitted recipe.
+
+- POST /api/submittedrecipes: Submit a new recipe.
+- GET /api/submittedrecipes: Get user-submitted recipes.
+- DELETE /api/submittedrecipes/:recipeId: Delete a submitted recipe.
 
 Description of the application
 
-Home Page:
+- Home Page:
+
 The homepage displays a grid of recipes with options to filter by category. Users can view details or add recipes to their favorites.
 
 ![Home Page: ](./screenshots/home-page.png)
 
-Recipe Details Page:
+- Recipe Details Page:
+
 This page shows detailed information about a recipe, including a list of ingredients and step-by-step instructions.
 
 ![Recipe Details Page: ](./screenshots/recipe-details.png)
 
-Login Page:
+- Login Page:
+
 The login page enables users to securely log in to access features like submitting recipes, viewing favorites, and managing their profile.
 
 ![Login Page: ](./screenshots/login-page.png)
 
-Profile Page:
+- Profile Page:
+
 The profile page displays user information, favorite recipes, and recipes submitted by the user.
 
 ![Profile Page: ](./screenshots/profile-page.png)
 
-Submit Recipe Page:
+- Submit Recipe Page:
+
 This page lets users submit their own recipes by entering a title, category, ingredients, and instructions.
 
 ![Submit Recipe Page: ](./screenshots/submit-recipe.png)
 
-Footer Page:
+- Footer Page:
+
 The footer section is displayed at the bottom of the application. It includes navigation links and provides quick access to important sections.
 
 ![Footer Page: ](./screenshots/footer-page.png)
