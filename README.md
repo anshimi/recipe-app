@@ -152,14 +152,29 @@ Description of the application
 1. Home Page
 The homepage displays a grid of recipes with options to filter by category. Users can view details or add recipes to their favorites.
 
+![Home Page](./screenshots/home-page.png)
+
 2. Recipe Details Page
 This page shows detailed information about a recipe, including a list of ingredients and step-by-step instructions.
 
-3. Submit Recipe Page
+![Recipe Details Page](./screenshots/recipe-details.png)
+
+3. Login Page
+The login page enables users to securely log in to access features like submitting recipes, viewing favorites, and managing their profile.
+
+![Login Page](./screenshots/login-page.png)
+
+4. Profile Page
+The profile page displays user information, favorite recipes, and recipes submitted by the user.
+
+![Profile Page](./screenshots/profile-page.png)
+
+5. Submit Recipe Page
 This page lets users submit their own recipes by entering a title, category, ingredients, and instructions.
 
-4. Favorites Section
-Users can view and manage their saved favorite recipes directly from their profile page.
+![Submit Recipe Page](./screenshots/submit-recipe.png)
 
-5. Profile Page
-The profile page displays user information, favorite recipes, and recipes submitted by the user.
+6. Footer Page
+The footer section is displayed at the bottom of the application. It includes navigation links and provides quick access to important sections.
+
+![Footer Page](./screenshots/footer-page.png)
