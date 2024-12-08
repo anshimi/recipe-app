@@ -73,6 +73,7 @@ npm run dev
 Folder Structure
 
 Backend
+
 server/
 │
 ├── models/ # Mongoose schemas for MongoDB
