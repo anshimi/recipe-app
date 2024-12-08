@@ -151,32 +151,32 @@ DELETE /api/submittedrecipes/:recipeId: Delete a submitted recipe.
 
 Description of the application
 
-Home Page
+Home Page:
 The homepage displays a grid of recipes with options to filter by category. Users can view details or add recipes to their favorites.
 
-![Home Page](./screenshots/home-page.png)
+![Home Page: ](./screenshots/home-page.png)
 
-Recipe Details Page
+Recipe Details Page:
 This page shows detailed information about a recipe, including a list of ingredients and step-by-step instructions.
 
-![Recipe Details Page](./screenshots/recipe-details.png)
+![Recipe Details Page: ](./screenshots/recipe-details.png)
 
-Login Page
+Login Page:
 The login page enables users to securely log in to access features like submitting recipes, viewing favorites, and managing their profile.
 
-![Login Page](./screenshots/login-page.png)
+![Login Page: ](./screenshots/login-page.png)
 
-Profile Page
+Profile Page:
 The profile page displays user information, favorite recipes, and recipes submitted by the user.
 
-![Profile Page](./screenshots/profile-page.png)
+![Profile Page: ](./screenshots/profile-page.png)
 
-Submit Recipe Page
+Submit Recipe Page:
 This page lets users submit their own recipes by entering a title, category, ingredients, and instructions.
 
-![Submit Recipe Page](./screenshots/submit-recipe.png)
+![Submit Recipe Page: ](./screenshots/submit-recipe.png)
 
-Footer Page
+Footer Page:
 The footer section is displayed at the bottom of the application. It includes navigation links and provides quick access to important sections.
 
-![Footer Page](./screenshots/footer-page.png)
+![Footer Page: ](./screenshots/footer-page.png)
