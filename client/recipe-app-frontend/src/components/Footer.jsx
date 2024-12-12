@@ -3,24 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import "./Footer.css";
 
-function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRecipesByCategory, fetchAllRecipes }) {
+function Footer({ setSelectedCategory, setSearchQuery, selectedCategory }) {
   const navigate = useNavigate();
-  
-  // Allowed Categories to include in Application
+
+  // Categories to include in the application
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"];
 
-  // Handles logo click
+  // Handle logo click
   const handleLogoClick = () => {
     setSelectedCategory("");
     setSearchQuery("");
     navigate("/");
   };
 
-  // Handles category selection
+  // Handle category selection
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category); 
-    setSearchQuery(""); 
-    navigate("/"); 
+    setSelectedCategory(category);
+    setSearchQuery("");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -35,7 +35,9 @@ function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRe
             <h3>Recipe Haven</h3>
           </Link>
           <p className="footer-blurb">
-            <strong>Recipe Haven</strong> delicious recipes tailored to your taste. From savory dishes to healthy options, Recipe Haven is your one-stop platform for culinary inspiration.
+            <strong>Recipe Haven</strong> is your ultimate platform for culinary
+            inspiration. Explore recipes tailored to your taste, from savory
+            dishes to healthy options.
           </p>
         </div>
 
@@ -46,7 +48,7 @@ function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRe
               {categories.map((category) => (
                 <li key={category}>
                   <button
-                    className="footer-link"
+                    className="footer-category-link"
                     onClick={() => handleCategoryClick(category)}
                   >
                     {category}
@@ -58,7 +60,7 @@ function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRe
         </div>
 
         <div className="footer-section">
-          <h3>Contact us</h3>
+          <h3>Contact Us</h3>
           <p>
             <a href="mailto:email@recipehaven.ca">email@recipehaven.ca</a>
           </p>
@@ -71,7 +73,7 @@ function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRe
         </div>
       </footer>
       <div className="footer-copyright">
-        <p>&copy; Recipe Haven</p>
+        <p>&copy; {new Date().getFullYear()} Recipe Haven</p>
       </div>
     </div>
   );
