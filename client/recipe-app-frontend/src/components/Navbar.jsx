@@ -1,42 +1,45 @@
-import React, { useState, useEffect, useContext } from "react"; // Added useContext
+import React, { useState, useEffect, useContext } from "react"; 
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { AuthContext } from "../components/AuthContext"; // AuthContext for user authentication
+import { AuthContext } from "../components/AuthContext"; 
 import "../App.css";
 
 function Navbar({ setSelectedCategory, setSearchQuery }) {
   const [query, setQuery] = useState("");
   const { user, logout } = useContext(AuthContext); // Access user and logout from AuthContext
-  console.log("User in Navbar:", user); // Debugging log
+  console.log("User in Navbar:", user); 
   const navigate = useNavigate();
   const location = useLocation(); // Detect current route
 
+  // Handle recipe search
   const handleSearch = () => {
-    setSearchQuery(query); // Pass the search query to the parent
-    navigate("/results"); // Redirect to the results page
+    setSearchQuery(query); 
+    navigate("/results"); 
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      handleSearch(); // Trigger search on "Enter" key
+      handleSearch(); 
     }
   };
 
+  // Handle logo click - when click on the title
   const handleLogoClick = () => {
-    setSelectedCategory(""); // Reset category filter
-    setSearchQuery(""); // Reset search query
-    navigate("/"); // Navigate back to the homepage
+    setSelectedCategory(""); 
+    setSearchQuery(""); 
+    navigate("/"); 
   };
 
+  // Handle category click - when click on the category
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category); // Set the selected category
-    setSearchQuery(""); // Clear any existing search query
-    navigate("/"); // Navigate back to the homepage
+    setSelectedCategory(category); 
+    setSearchQuery(""); 
+    navigate("/"); 
   };
 
   // Clear search box when navigating away from Results Page
   useEffect(() => {
     if (location.pathname !== "/results") {
-      setQuery(""); // Clear search input box
+      setQuery(""); 
     }
   }, [location.pathname]);
 

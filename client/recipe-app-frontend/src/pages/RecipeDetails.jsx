@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../components/AuthContext"; // Import AuthContext
+import { AuthContext } from "../components/AuthContext";
 import "../App.css";
 
 function RecipeDetails() {
-  const { id } = useParams();
-  const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [notification, setNotification] = useState(""); // Notification for favorites
-  const { user, addFavorite } = useContext(AuthContext); // Access user and addFavorite
+  const { id } = useParams(); // Retrieves the recipe ID from the URL parameters
+  const [recipe, setRecipe] = useState(null); // Stores the details of the selected recipe
+  const [loading, setLoading] = useState(true); // Tracks the loading state for fetching the recipe details
+  const [notification, setNotification] = useState(""); // Manages notifications or messages for the user
+  const { user, addFavorite } = useContext(AuthContext); // Accesses the current user and function to add recipes to favorites
 
+  // Fetch recipes from API
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
@@ -28,6 +29,7 @@ function RecipeDetails() {
     fetchRecipe();
   }, [id]);
 
+  // Add to favorites 
   const handleAddFavorite = async () => {
     if (!user) {
       setNotification("Please log in to add to favorites!");

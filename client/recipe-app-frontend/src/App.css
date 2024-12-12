@@ -33,6 +33,7 @@ h2 {
   border-bottom: 2px solid #007bff; 
   font-family: 'Arial', sans-serif; 
   gap: 10px;
+ 
 }
 
 .navbar-logo a {
@@ -47,7 +48,6 @@ h2 {
   color: #20b758; 
 }
 
-/* Categories - Inline with Search Bar */
 .navbar-categories {
   display: flex; 
   gap: 15px; 
@@ -338,7 +338,6 @@ h2 {
   margin-bottom: 15px;
 }
 
-
 .recipe-tags {
   display: flex;
   justify-content: center;
@@ -391,6 +390,7 @@ h2 {
   line-height: 1.6;
 }
 
+/* Favorite Button */
 .favorite-button {
   background-color: #d96009;
   color: white;
@@ -525,6 +525,8 @@ h2 {
 .recipe-card button:hover, .favorites-list button:hover {
   background-color: #c82333;
 }
+
+/* Remove button */
 .remove-button {
   margin-left: 10px;
   padding: 5px 10px;
@@ -661,6 +663,8 @@ h2 {
   color: white;
   border: none;
 }
+
+/* Submit Recipes */
 .submit-recipe-container{
   padding: 20px;
   width: 100%;

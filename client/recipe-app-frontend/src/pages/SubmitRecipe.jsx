@@ -3,7 +3,8 @@ import axios from "axios";
 import { AuthContext } from "../components/AuthContext";
 
 const SubmitRecipe = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext); // Accesses the current user context
+  // Set recipe form 
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -13,11 +14,13 @@ const SubmitRecipe = () => {
     instructions: "",
   });
 
+  // Handles input field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,6 +40,7 @@ const SubmitRecipe = () => {
     };
 
     try {
+      // Sends the recipe data to the backend API
       const response = await axios.post(
         `${import.meta.env.VITE_BE_URL}/api/submittedrecipes`,
         dataToSend

@@ -5,22 +5,23 @@ import { useNavigate } from "react-router-dom";
 
 
 function Home({ selectedCategory }) {
-  const [recipes, setRecipes] = useState([]); // Store recipes
-  const [loading, setLoading] = useState(false); // Track loading state
-  const [error, setError] = useState(null); // Track errors if any
-  const navigate = useNavigate();
+  const [recipes, setRecipes] = useState([]); // Stores fetched recipes
+  const [loading, setLoading] = useState(false); // Tracks loading status
+  const [error, setError] = useState(null); // Tracks errors
+  const navigate = useNavigate(); // Enables navigation between pages
 
-  const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; // Only allowed categories
-  const cache = useRef({}); // Cache recipes to avoid unnecessary re-fetching
+  // Allowed Categories to include in Application
+  const categories = ["Chicken", "Beef", "Pork", "Vegetarian"]; 
+  const cache = useRef({}); // Cache to avoid unnecessary re-fetching
 
+  // Shuffle and limit the recipes to show to 12
   const shuffleAndLimit = (array, limit = 12) => {
-    // Shuffle and limit the array
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return shuffled.slice(0, limit); // Return exactly 6 recipes
+    return shuffled.slice(0, limit);
   };
 
   const fetchRecipes = async () => {
@@ -39,8 +40,8 @@ function Home({ selectedCategory }) {
             `https://www.themealdb.com/api/json/v1/1/filter.php?c=${selectedCategory}`
           );
           const fetchedRecipes = response.data.meals || [];
-          cache.current[selectedCategory] = fetchedRecipes; // Cache the result
-          setRecipes(shuffleAndLimit(fetchedRecipes)); // Shuffle and limit to 6
+          cache.current[selectedCategory] = fetchedRecipes; 
+          setRecipes(shuffleAndLimit(fetchedRecipes)); 
         }
       } else {
         // Fetch random recipes from allowed categories
@@ -48,20 +49,18 @@ function Home({ selectedCategory }) {
 
         for (const category of categories) {
           if (cache.current[category]) {
-            // Use cached recipes
-            allRandomRecipes.push(...cache.current[category]);
+              allRandomRecipes.push(...cache.current[category]);
           } else {
-            // Fetch recipes from API
             const response = await axios.get(
               `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
             );
             const fetchedRecipes = response.data.meals || [];
-            cache.current[category] = fetchedRecipes; // Cache the result
+            cache.current[category] = fetchedRecipes;
             allRandomRecipes.push(...fetchedRecipes);
           }
         }
 
-        // Shuffle and pick 6 random recipes from all allowed categories
+        // Shuffle and pick 12 random recipes from all allowed categories
         setRecipes(shuffleAndLimit(allRandomRecipes, 12));
       }
     } catch (error) {

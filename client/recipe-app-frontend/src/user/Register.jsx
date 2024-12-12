@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState(""); // State for storing user email input
+  const [password, setPassword] = useState(""); // State for storing user password input
+  const [message, setMessage] = useState(""); // State for displaying success or error messages
 
+  // Handle form submission for registration
   const handleSubmit = async (e) => {
     e.preventDefault();
 

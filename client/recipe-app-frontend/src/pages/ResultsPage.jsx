@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchRecipesBySearch } from "../utils/fetchRecipes"; // Centralized fetch logic
+import { fetchRecipesBySearch } from "../utils/fetchRecipes";
 import RecipeCard from "../components/RecipeCard";
 
 function ResultsPage({ searchQuery }) {
@@ -16,7 +16,7 @@ function ResultsPage({ searchQuery }) {
       try {
         if (searchQuery) {
           const fetchedRecipes = await fetchRecipesBySearch(searchQuery);
-          setRecipes(fetchedRecipes); // Update state with fetched recipes
+          setRecipes(fetchedRecipes); 
         }
       } catch (err) {
         setError("Failed to load recipes. Please try again.");

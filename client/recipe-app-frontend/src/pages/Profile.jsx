@@ -38,6 +38,7 @@ function Profile() {
     }
   }, [user]);
 
+  // Remove recipes from profile
   const removeFromFavorites = async (recipeId) => {
     try {
       await axios.delete(

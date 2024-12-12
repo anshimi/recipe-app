@@ -5,19 +5,22 @@ import "./Footer.css";
 
 function Footer({ setSelectedCategory, setSearchQuery, selectedCategory, fetchRecipesByCategory, fetchAllRecipes }) {
   const navigate = useNavigate();
-
+  
+  // Allowed Categories to include in Application
   const categories = ["Chicken", "Beef", "Pork", "Vegetarian"];
 
+  // Handles logo click
   const handleLogoClick = () => {
     setSelectedCategory("");
     setSearchQuery("");
     navigate("/");
   };
 
+  // Handles category selection
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category); // Set the selected category
-    setSearchQuery(""); // Clear the search query
-    navigate("/"); // Always navigate to the homepage
+    setSelectedCategory(category); 
+    setSearchQuery(""); 
+    navigate("/"); 
   };
 
   useEffect(() => {

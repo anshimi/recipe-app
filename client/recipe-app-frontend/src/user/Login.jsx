@@ -3,11 +3,12 @@ import { AuthContext } from "../components/AuthContext";
 import axios from "axios";
 
 function Login() {
-  const { login } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const { login } = useContext(AuthContext); // Access the login function from AuthContext
+  const [email, setEmail] = useState(""); // State for storing user email input
+  const [password, setPassword] = useState(""); // State for storing user password input
+  const [message, setMessage] = useState(""); // State for displaying success or error messages
 
+  // Handle form submission for login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
