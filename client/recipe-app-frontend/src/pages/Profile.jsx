@@ -75,7 +75,7 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h2>Welcome, {user.email}</h2>
+      <div className="proifle-head"><h2>Welcome, {user.email}</h2></div>
 
       {/* Favorites Section */}
       <section className="favorites-section">

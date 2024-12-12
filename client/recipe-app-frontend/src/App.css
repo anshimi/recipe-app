@@ -30,7 +30,6 @@ h2 {
   flex-wrap: wrap; 
   padding: 15px 20px;
   background-color: #ffffff; 
-  border-bottom: 2px solid #007bff; 
   font-family: 'Arial', sans-serif; 
   gap: 10px;
  
@@ -129,12 +128,13 @@ h2 {
   background-color: #d96009;
   border-radius: 5px;
   border: 1px solid transparent;
+  margin-right: 10px;
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
 
 .navbar-auth a:hover {
-  background-color: #dc3545;
-  border: 1px solid #dc3545;
+  background-color: #20b758;
+  border: 1px solid #20b758;
 }
 
 .navbar-auth .logout-button {
@@ -149,7 +149,7 @@ h2 {
 }
 
 .navbar-auth .logout-button:hover {
-  background-color: #c82333;
+  background-color: #20b758;
   transform: scale(1.05);
 }
 
@@ -419,7 +419,7 @@ h2 {
 
 .profile-container h2 {
   text-align: center;
-  color: #007bff;
+  color:black;
   margin-bottom: 30px;
 }
 
@@ -450,11 +450,11 @@ h2 {
 
 .profile-container ul li a {
   text-decoration: none;
-  color: #007bff;
+  color: black;
 }
 
 .profile-container ul li:hover {
-  background-color: #007bff;
+  background-color: #20b758;
   color: white;
   transform: translateY(-3px);
 }
@@ -523,7 +523,7 @@ h2 {
 }
 
 .recipe-card button:hover, .favorites-list button:hover {
-  background-color: #c82333;
+  background-color: #20b758;
 }
 
 /* Remove button */
@@ -540,7 +540,7 @@ h2 {
 }
 
 .remove-button:hover {
-  background-color: #c82333;
+  background-color: black;
 }
 
 
@@ -713,7 +713,7 @@ h2 {
   margin-top: 30px;
   margin-bottom: 30px;
     padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #ff6600;
     color: white;
     border: none;
     border-radius: 5px;
@@ -723,7 +723,7 @@ h2 {
 }
 
 .submit-recipe-btn:hover {
-  background-color: #0056b3; 
+  background-color: #20b758; 
 }
 .profile-recipe-image {
   width: 50% !important; 
