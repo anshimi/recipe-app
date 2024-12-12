@@ -116,7 +116,7 @@ h2 {
 }
 
 .search-bar button:hover {
-  background-color: #20b758;
+  background-color: #dc3545;
   transform: scale(1.05);
 }
 
@@ -713,7 +713,7 @@ h2 {
   margin-top: 30px;
   margin-bottom: 30px;
     padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #d96009;
     color: white;
     border: none;
     border-radius: 5px;
@@ -723,7 +723,7 @@ h2 {
 }
 
 .submit-recipe-btn:hover {
-  background-color: #0056b3; 
+  background-color: #dc3545; 
 }
 .profile-recipe-image {
   width: 50% !important; 
