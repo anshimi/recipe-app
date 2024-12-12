@@ -2,7 +2,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    border-top: 2px solid #007bff;
+    border-top: 2px solid #20b758;
     padding: 20px 15px;
     margin: 0;
     position: relative; /* Needed for positioning pseudo-elements */
@@ -76,7 +76,7 @@
     justify-content: center; 
     text-align: center; 
     width: 100%;
-    border-top: 2px solid #007bff;
+    border-top: 2px solid #20b758;
 }
 
 .footer-link {
