@@ -1,11 +1,8 @@
 .footer-component {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    border-top: 2px solid #007bff;
-    padding: 20px 15px;
-    margin: 0;
-    position: relative; /* Needed for positioning pseudo-elements */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    background-color: #282c34;
     color: #fff;
     padding: 40px 20px;
     border-top: 4px solid #ff6600;
@@ -32,20 +29,14 @@
   
   .footer-component ul {
     list-style-type: none;
-    padding: 2px;
-    
-}
-
-.footer-copyright {
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    text-align: center; 
-    width: 100%;
-    border-top: 2px solid #007bff;
-}
-
-.footer-link {
+    padding: 0;
+  }
+  
+  .footer-component li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-link {
     background: none;
     border: none;
     color: #1e90ff;

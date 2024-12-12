@@ -30,7 +30,6 @@ h2 {
   flex-wrap: wrap; 
   padding: 15px 20px;
   background-color: #ffffff; 
-  border-bottom: 2px solid #007bff; 
   font-family: 'Arial', sans-serif; 
   gap: 10px;
  
@@ -524,7 +523,7 @@ h2 {
 }
 
 .recipe-card button:hover, .favorites-list button:hover {
-  background-color: #20b758;
+  background-color: black;
 }
 
 /* Remove button */
