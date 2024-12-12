@@ -3,6 +3,7 @@ import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import { useNavigate } from "react-router-dom";
 
+
 function Home({ selectedCategory }) {
   const [recipes, setRecipes] = useState([]); // Store recipes
   const [loading, setLoading] = useState(false); // Track loading state
@@ -76,9 +77,9 @@ function Home({ selectedCategory }) {
   }, [selectedCategory]);
   return (
     <div className="container">
-      <h1>Welcome to Recipe Haven</h1>
-      {loading && <h2>Loading recipes...</h2>}
-      {error && <p className="error">{error}</p>}
+      <h1>
+        Welcome to <span className="highlight">Recipe Haven</span>
+      </h1>      {error && <p className="error">{error}</p>}
       <div className="recipe-grid">
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.idMeal} recipe={recipe} />

@@ -1,8 +1,14 @@
 /* General Styles */
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  background-image: url('/footerbg1.png');
+  background-size:auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  
 }
 
 h1 {
@@ -33,12 +39,12 @@ h2 {
   font-size: 1.9rem; 
   font-weight: bold;
   text-decoration: none;
-  color: #007bff; 
+  color: #d96009; 
   transition: color 0.3s ease;
 }
 
 .navbar-logo a:hover {
-  color: #0056b3; 
+  color: #20b758; 
 }
 
 /* Categories - Inline with Search Bar */
@@ -60,20 +66,20 @@ h2 {
 }
 
 .category-link:hover {
-  background-color: #007bff; 
+  background-color: #d96009; 
   color: white; 
-  border: 1px solid #0056b3; 
+  border: 1px solid #d96009; 
 }
 
 .selected-category {
-  background-color: #007bff; 
+  background-color: #d96009; 
   color: white; 
-  border: 1px solid #0056b3; 
+  border: 1px solid #d96009; 
 }
 
 .category-link:focus {
   outline: none; 
-  border: 1px solid #0056b3; 
+  border: 1px solid #d96009; 
 }
 
 /* Search Bar Styles */
@@ -100,7 +106,7 @@ h2 {
 }
 
 .search-bar button {
-  background-color: #007bff;
+  background-color: #d96009;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -110,7 +116,7 @@ h2 {
 }
 
 .search-bar button:hover {
-  background-color: #0056b3;
+  background-color: #20b758;
   transform: scale(1.05);
 }
 
@@ -120,15 +126,15 @@ h2 {
   text-decoration: none;
   color: white;
   padding: 8px 15px;
-  background-color: #007bff;
+  background-color: #d96009;
   border-radius: 5px;
   border: 1px solid transparent;
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
 
 .navbar-auth a:hover {
-  background-color: #0056b3;
-  border: 1px solid #0056b3;
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
 }
 
 .navbar-auth .logout-button {
@@ -209,6 +215,10 @@ h2 {
   object-fit: cover;
   border-radius: 8px;
 }
+.highlight {
+  color: #ff5722; 
+  font-weight: bold; 
+}
 
 .recipe-actions {
   display: flex;
@@ -225,7 +235,7 @@ h2 {
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
-  background-color: #007bff;
+  background-color: #d96009;
   color: white;
 }
 
@@ -238,7 +248,7 @@ h2 {
 .recipe-card button {
   margin-top: 10px;
   padding: 8px 12px;
-  background-color: #007bff;
+  background-color: #d96009;
   color: white;
   border: none;
   border-radius: 5px;
@@ -247,7 +257,7 @@ h2 {
 }
 
 .recipe-actions button:hover {
-  background-color: #0056b3;
+  background-color: #20b758;
 }
 
 /* Responsive Styles */
@@ -336,24 +346,28 @@ h2 {
 }
 
 .tag {
-  background-color: #007bff;
+  background-color: #20b758;
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.9rem;
 }
 
-/* Right Section */
-.recipe-info-section {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
+
+.recipe-info-section .content-wrapper {
+  background-color: whitesmoke; 
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  max-width: 800px;
+  margin: 0 auto; 
 }
 
 .recipe-title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #333333; 
 }
 
 .recipe-info-section h2 {
@@ -378,7 +392,7 @@ h2 {
 }
 
 .favorite-button {
-  background-color: #007bff;
+  background-color: #d96009;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -389,7 +403,7 @@ h2 {
 }
 
 .favorite-button:hover {
-  background-color: #0056b3;
+  background-color: #20b758;
 }
 
 /* Profile Container */
@@ -580,7 +594,7 @@ h2 {
 }
 
 .auth-button {
-  background-color: #007bff;
+  background-color: #d96009;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -591,7 +605,7 @@ h2 {
 }
 
 .auth-button:hover {
-  background-color: #0056b3;
+  background-color: #00b34e;
   transform: scale(1.05);
 }
 
@@ -599,7 +613,7 @@ h2 {
   width: 100%;
   margin-top: 10px;
     padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #d96009;
     color: white;
     border: none;
     border-radius: 5px;
@@ -607,7 +621,7 @@ h2 {
     font-size: 0.9rem;
 }
 .submitbutton:hover {
-  background-color: #0056b3; 
+  background-color: #20b758; 
 }
 
 .notification {
@@ -643,7 +657,7 @@ h2 {
 }
 
 .page-button.active {
-  background: #007bff;
+  background: #d96009;
   color: white;
   border: none;
 }

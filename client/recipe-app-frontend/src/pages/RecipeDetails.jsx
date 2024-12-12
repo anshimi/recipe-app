@@ -95,6 +95,7 @@ function RecipeDetails() {
 
         {/* Right Section */}
         <div className="recipe-info-section">
+        <div className="content-wrapper">
           <h1 className="recipe-title">{recipe.strMeal}</h1>
           <h2 className="section-heading">Ingredients</h2>
           <ul className="ingredient-list">
@@ -110,6 +111,7 @@ function RecipeDetails() {
             Add to Favorites
           </button>
           {notification && <p className="notification">{notification}</p>}
+        </div>
         </div>
       </div>
     </div>
