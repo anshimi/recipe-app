@@ -10,10 +10,10 @@ function SearchBar({ searchQuery }) {
   // Fetch recipes based on search query when it changes
   useEffect(() => {
     const fetchRecipes = async () => {
-      setLoading(true); // Start loading
+      setLoading(true);
       try {
         // If there's a search query, use it to search for a specific recipe
-        const query = searchQuery ? `&s=${searchQuery}` : ''; // Append the search query to the URL
+        const query = searchQuery ? `&s=${searchQuery}` : '';
         const response = await axios.get(
           `https://www.themealdb.com/api/json/v1/1/search.php?${query}`
         );
@@ -27,12 +27,12 @@ function SearchBar({ searchQuery }) {
       } catch (error) {
         console.error("Error fetching recipes:", error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
     fetchRecipes();
-  }, [searchQuery]); // This effect runs whenever searchQuery changes
+  }, [searchQuery]);
 
   return (
     <div className="search-bar-container">

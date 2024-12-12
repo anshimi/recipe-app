@@ -4,11 +4,12 @@ import { AuthContext } from "../components/AuthContext";
 import { Link } from "react-router-dom";
 
 function Profile() {
-  const { user } = useContext(AuthContext);
-  const [favorites, setFavorites] = useState([]);
-  const [submittedRecipes, setSubmittedRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext); // Retrieves the current logged-in user from context
+  const [favorites, setFavorites] = useState([]); // Stores the user's favorite recipes
+  const [submittedRecipes, setSubmittedRecipes] = useState([]); // Stores recipes submitted by the user
+  const [loading, setLoading] = useState(true); // Tracks the loading state for fetching data
 
+  // User Profile Data
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -37,6 +38,7 @@ function Profile() {
     }
   }, [user]);
 
+  // Remove recipes from profile
   const removeFromFavorites = async (recipeId) => {
     try {
       await axios.delete(

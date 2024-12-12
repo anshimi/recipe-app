@@ -12,25 +12,25 @@ import Footer from "./components/Footer";
 import axios from "axios";
 
 function App() {
-  const [recipes, setRecipes] = useState([]); // Recipes state
-  const [selectedCategory, setSelectedCategory] = useState(""); // Selected category
-  const [searchQuery, setSearchQuery] = useState(""); // Search query
+  const [recipes, setRecipes] = useState([]); 
+  const [selectedCategory, setSelectedCategory] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState(""); 
 
-  // Fetch recipes when the app loads
+  // Fetch Recipes from The MealDB API
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
           "https://www.themealdb.com/api/json/v1/1/search.php?s="
         );
-        setRecipes(response.data.meals || []); // Store recipes in state
+        setRecipes(response.data.meals || []);
       } catch (error) {
         console.error("Error fetching recipes:", error);
       }
     };
 
     fetchRecipes();
-  }, []); // Run once on mount
+  }, []);
 
   return (
     <div>
