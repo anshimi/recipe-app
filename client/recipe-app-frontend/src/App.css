@@ -530,7 +530,7 @@ h2 {
 .remove-button {
   margin-left: 10px;
   padding: 5px 10px;
-  background-color: #dc3545;
+  background-color: #d96009;
   color: white;
   border: none;
   border-radius: 5px;
@@ -540,7 +540,7 @@ h2 {
 }
 
 .remove-button:hover {
-  background-color: black;
+  background-color: #28a745;
 }
 
 

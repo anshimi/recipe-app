@@ -1,7 +1,7 @@
 .footer-component {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    gap: 40px;
     background-color: #282c34;
     color: #fff;
     padding: 40px 20px;
@@ -12,6 +12,7 @@
   
   .footer-section {
     text-align: left;
+    padding: 10px 20px;
   }
   
   .footer-component h3 {
@@ -22,7 +23,7 @@
   }
   
   .footer-blurb {
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.6;
     color: #ddd;
   }
