@@ -523,7 +523,7 @@ h2 {
 }
 
 .recipe-card button:hover, .favorites-list button:hover {
-  background-color: black;
+  background-color: #20b758;
 }
 
 /* Remove button */

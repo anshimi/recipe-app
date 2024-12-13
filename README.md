@@ -59,16 +59,19 @@ Running the Application
 Step 1: Install Dependencies
 
 Navigate to the backend and frontend directories and run the following command to install all required dependencies:
+
 npm install
 
 Step 2: Start the Backend
 
 Go to the server directory and run the backend using:
+
 node index.js
 
 Step 3: Start the Frontend
 
 npm run dev
+
 
 Folder Structure
 
@@ -161,6 +164,8 @@ Submitted Recipes
 - DELETE /api/submittedrecipes/:recipeId: Delete a submitted recipe.
 
 Description of the application
+
+- Live URL of the application: https://recipe-app-react-6s8p.onrender.com/
 
 - Home Page:
 
